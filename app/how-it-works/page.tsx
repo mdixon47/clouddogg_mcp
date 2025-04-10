@@ -1,4 +1,3 @@
-import Header from "@/components/header"
 import Footer from "@/components/footer"
 import HowItWorksHero from "@/components/how-it-works-hero"
 import HowItWorksSteps from "@/components/how-it-works-steps"
@@ -15,7 +14,6 @@ export default function HowItWorksPage() {
         <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
 
-        <Header />
         <main>
           <HowItWorksHero />
           <HowItWorksSteps />

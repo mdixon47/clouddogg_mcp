@@ -1,4 +1,6 @@
-export default {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -49,64 +51,13 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        light: {
-          background: "#ffffff",
-          foreground: "#1f2937",
-          muted: "#f3f4f6",
-          border: "#e5e7eb",
-        },
-        dark: {
-          background: "#111827",
-          foreground: "#f9fafb",
-          muted: "#1f2937",
-          border: "#374151",
-        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-        ping: {
-          "75%, 100%": {
-            transform: "scale(2)",
-            opacity: "0",
-          },
-        },
-        fadeIn: {
-          "0%": { opacity: "0" },
-          "100%": { opacity: "1" },
-        },
-        slideUp: {
-          "0%": { transform: "translateY(10px)" },
-          "100%": { transform: "translateY(0)" },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        ping: "ping 2s cubic-bezier(0, 0, 0.2, 1) infinite",
-        fadeIn: "fadeIn 0.5s ease-out",
-        slideUp: "slideUp 0.5s ease-out",
-      },
-      transitionDelay: {
-        300: "300ms",
-        600: "600ms",
-        900: "900ms",
-      },
-      screens: {
-        xs: "480px",
-      },
     },
   },
-  plugins: ["tailwindcss-animate"],
+  plugins: [require("tailwindcss-animate")],
 }

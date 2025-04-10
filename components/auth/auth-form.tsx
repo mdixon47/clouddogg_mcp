@@ -1,29 +1,59 @@
-import Header from "@/components/header"
-import HeroSection from "@/components/hero-section"
-import FeaturesSection from "@/components/features-section"
-import UseCasesSection from "@/components/use-cases-section"
-import HowItWorksSection from "@/components/how-it-works-section"
-import TestimonialsSection from "@/components/testimonials-section"
-import ClosingCTA from "@/components/closing-cta"
+"use client"
 
-export default function Home() {
+import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import LoginForm from "./login-form"
+import SignupForm from "./signup-form"
+import AuthTabsHandler from "./auth-tabs-handler"
+
+export default function AuthForm() {
+  const searchParams = useSearchParams()
+  const [activeTab, setActiveTab] = useState<string>("login")
+
+  useEffect(() => {
+    // Check if there's a tab parameter in the URL
+    const tabParam = searchParams.get("tab")
+    if (tabParam === "signup") {
+      setActiveTab("signup")
+    }
+  }, [searchParams])
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900 text-gray-100">
-      <div className="relative overflow-hidden">
-        {/* Background glow effects */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
+    <div className="bg-white dark:bg-gray-800/30 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-xl">
+      <AuthTabsHandler setActiveTab={setActiveTab} />
+      <div className="p-6">
+        <div className="text-center mb-6">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-white dark:via-blue-100 dark:to-cyan-200 bg-clip-text text-transparent">
+            Welcome to CloudDogg
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-2">
+            {activeTab === "login" ? "Sign in to your account to continue" : "Create an account to get started"}
+          </p>
+        </div>
 
-        <Header />
-        <main>
-          <HeroSection />
-          <FeaturesSection />
-          <UseCasesSection />
-          <HowItWorksSection />
-          <TestimonialsSection />
-          <ClosingCTA />
-        </main>
+        <Tabs defaultValue="login" value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid grid-cols-2 mb-6">
+            <TabsTrigger
+              value="login"
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white"
+            >
+              Login
+            </TabsTrigger>
+            <TabsTrigger
+              value="signup"
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white"
+            >
+              Sign Up
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="login">
+            <LoginForm onSwitchToSignup={() => setActiveTab("signup")} />
+          </TabsContent>
+          <TabsContent value="signup">
+            <SignupForm onSwitchToLogin={() => setActiveTab("login")} />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   )

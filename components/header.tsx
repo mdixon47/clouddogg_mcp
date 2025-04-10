@@ -1,152 +1,148 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Menu, X, BookOpen } from "lucide-react"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { useState, useEffect } from "react"
+import { ThemeToggle } from "./theme-toggle"
+import { Menu, X } from "lucide-react"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  // Close mobile menu when resizing to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && isMenuOpen) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [isMenuOpen])
+
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, [isMenuOpen])
+
   return (
-    <header className="w-full py-4 px-4 md:px-8 bg-white/90 dark:bg-gray-950/80 backdrop-blur-md fixed top-0 z-50 border-b border-gray-200 dark:border-gray-800 shadow-sm">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center">
-          <Link href="/" className="flex items-center">
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent">
-              CloudDogg
-            </span>
-            <span className="ml-1 px-1.5 py-0.5 text-xs font-semibold bg-blue-500/20 text-blue-600 dark:text-blue-300 rounded-md">
-              MCP
-            </span>
-          </Link>
-        </div>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          <Link
-            href="/#features"
-            className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
-          >
-            Features
-          </Link>
-          <Link
-            href="/#use-cases"
-            className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
-          >
-            Use Cases
-          </Link>
-          <Link
-            href="/how-it-works"
-            className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
-          >
-            How It Works
-          </Link>
-          <Link
-            href="/learn"
-            className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors flex items-center"
-          >
-            <BookOpen className="h-4 w-4 mr-1" />
-            Learning
-          </Link>
-          <Link
-            href="/#testimonials"
-            className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
-          >
-            Testimonials
-          </Link>
-        </nav>
-
-        {/* Desktop navigation buttons section */}
-        <div className="hidden md:flex items-center space-x-4">
-          <ThemeToggle />
-          <Button
-            variant="outline"
-            className="border-gray-300 text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
-            asChild
-          >
-            <Link href="/auth">Log In</Link>
-          </Button>
-          <Button
-            className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white"
-            asChild
-          >
-            <Link href="/auth?tab=signup">Book a Demo</Link>
-          </Button>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <div className="flex items-center space-x-4 md:hidden">
-          <ThemeToggle />
-          <button
-            className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 p-4 shadow-md">
-          <nav className="flex flex-col space-y-4">
-            <Link
-              href="/#features"
-              className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Features
+    <>
+      <header className="sticky top-0 z-50 w-full border-b border-gray-800/20 bg-gray-950/80 backdrop-blur-md">
+        <div className="container flex h-16 items-center justify-between px-4 md:px-6">
+          <div className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
+              <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-xl font-bold text-transparent">
+                CloudDogg
+              </span>
             </Link>
-            <Link
-              href="/#use-cases"
-              className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Use Cases
+          </div>
+          <nav className="hidden md:flex items-center gap-6">
+            <Link href="/" className="text-sm font-medium text-gray-300 transition-colors hover:text-white">
+              Home
             </Link>
-            <Link
-              href="/how-it-works"
-              className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <Link href="/how-it-works" className="text-sm font-medium text-gray-300 transition-colors hover:text-white">
               How It Works
             </Link>
-            <Link
-              href="/learn"
-              className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors flex items-center"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <BookOpen className="h-4 w-4 mr-1" />
-              Learning
+            <Link href="/learn" className="text-sm font-medium text-gray-300 transition-colors hover:text-white">
+              Learn
             </Link>
-            <Link
-              href="/#testimonials"
-              className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Testimonials
+            <Link href="/case-studies" className="text-sm font-medium text-gray-300 transition-colors hover:text-white">
+              Case Studies
             </Link>
-            {/* Update the mobile menu buttons section */}
-            <div className="flex flex-col space-y-2 pt-2 border-t border-gray-200 dark:border-gray-800">
-              <Button
-                variant="outline"
-                className="border-gray-300 text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white w-full"
-                asChild
-              >
-                <Link href="/auth">Log In</Link>
-              </Button>
-              <Button
-                className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white w-full"
-                asChild
-              >
-                <Link href="/auth?tab=signup">Book a Demo</Link>
-              </Button>
-            </div>
           </nav>
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <Link
+              href="/auth"
+              className="hidden md:inline-flex h-9 items-center justify-center rounded-md bg-gradient-to-r from-blue-600 to-purple-600 px-4 text-sm font-medium text-white shadow transition-colors hover:from-blue-700 hover:to-purple-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950"
+            >
+              Sign In
+            </Link>
+            <button
+              className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:text-white md:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile menu overlay */}
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-gray-950/80 backdrop-blur-sm md:hidden"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          <div
+            className="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-gray-900 p-6 shadow-lg"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-8">
+              <Link href="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
+                <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-xl font-bold text-transparent">
+                  CloudDogg
+                </span>
+              </Link>
+              <button
+                className="rounded-md p-2 text-gray-400 hover:text-white"
+                onClick={() => setIsMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            <nav className="flex flex-col space-y-6">
+              <Link
+                href="/"
+                className="text-lg font-medium text-gray-300 hover:text-white"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link
+                href="/how-it-works"
+                className="text-lg font-medium text-gray-300 hover:text-white"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                How It Works
+              </Link>
+              <Link
+                href="/learn"
+                className="text-lg font-medium text-gray-300 hover:text-white"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Learn
+              </Link>
+              <Link
+                href="/case-studies"
+                className="text-lg font-medium text-gray-300 hover:text-white"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Case Studies
+              </Link>
+              <div className="pt-6 border-t border-gray-800">
+                <Link
+                  href="/auth"
+                  className="inline-flex h-10 w-full items-center justify-center rounded-md bg-gradient-to-r from-blue-600 to-purple-600 px-4 text-sm font-medium text-white shadow transition-colors hover:from-blue-700 hover:to-purple-700"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Sign In
+                </Link>
+              </div>
+            </nav>
+          </div>
         </div>
       )}
-    </header>
+    </>
   )
 }

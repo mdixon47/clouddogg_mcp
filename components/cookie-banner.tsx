@@ -18,17 +18,13 @@ export default function CookieBanner() {
   })
 
   useEffect(() => {
-    // Check if user has already made a choice
-    const cookieConsent = localStorage.getItem("cookie-consent")
+    // Force the banner to show on first render in development
+    // In production, you'd want to check localStorage
+    const timer = setTimeout(() => {
+      setIsVisible(true)
+    }, 1500)
 
-    if (!cookieConsent) {
-      // If no choice has been made, show the banner after a short delay
-      const timer = setTimeout(() => {
-        setIsVisible(true)
-      }, 1000)
-
-      return () => clearTimeout(timer)
-    }
+    return () => clearTimeout(timer)
   }, [])
 
   const handleAcceptAll = () => {

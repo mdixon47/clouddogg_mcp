@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Header from "@/components/header"
 import LearningHero from "@/components/learning/learning-hero"
 import FeaturedCourses from "@/components/learning/featured-courses"
 import LearningPaths from "@/components/learning/learning-paths"
@@ -21,7 +20,7 @@ export default function LearnPage() {
         <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
 
-        <Header />
+        
         <main>
           <LearningHero />
           <FeaturedCourses />

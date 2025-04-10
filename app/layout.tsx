@@ -8,7 +8,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { ThemeScript } from "@/components/theme-script"
 
 export const metadata: Metadata = {
-  title: "CloudDogg - AI Automation Platform",
+  title: "CloudDogg MCP - AI Automation Platform",
   description: "Connect your AI to everything. Automate anything with CloudDogg's MCP server.",
   generator: "v0.dev",
 }
@@ -28,6 +28,7 @@ export default function RootLayout({
               (function() {
                 try {
                   var savedTheme = localStorage.getItem('theme') || 'dark';
+                  document.documentElement.classList.remove('dark', 'light');
                   document.documentElement.classList.add(savedTheme);
                 } catch (e) {
                   console.error('Failed to set theme:', e);
