@@ -3,82 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Clock, ArrowRight } from "lucide-react"
-
-const courses = [
-  {
-    id: "mcp-fundamentals",
-    title: "MCP Server Fundamentals",
-    description:
-      "Learn the core concepts of Model Context Protocol servers and how they enable AI automation across thousands of apps.",
-    level: "Beginner",
-    duration: "4 weeks (16 hours)",
-    category: "Technical",
-  },
-  {
-    id: "zapier-integration",
-    title: "Zapier Integration Masterclass",
-    description: "Connect your MCP server to thousands of apps and create powerful automation workflows.",
-    level: "Intermediate",
-    duration: "5 weeks (20 hours)",
-    category: "Technical",
-  },
-  {
-    id: "ai-prompt-engineering",
-    title: "AI Prompt Engineering",
-    description: "Master the art of crafting effective prompts to get the most out of your AI automation.",
-    level: "Intermediate",
-    duration: "4 weeks (16 hours)",
-    category: "Technical",
-  },
-  {
-    id: "secure-database",
-    title: "Secure Database Integration",
-    description: "Learn how to securely connect your MCP server to databases while maintaining compliance.",
-    level: "Advanced",
-    duration: "6 weeks (24 hours)",
-    category: "Technical",
-  },
-  {
-    id: "web-scraping",
-    title: "No-Code Web Scraping",
-    description: "Extract and process data from websites without writing a single line of code.",
-    level: "Beginner",
-    duration: "3 weeks (12 hours)",
-    category: "Technical",
-  },
-  {
-    id: "security-compliance",
-    title: "Security & Compliance for Veterans",
-    description: "Special considerations for veteran-owned businesses handling sensitive data.",
-    level: "Intermediate",
-    duration: "5 weeks (20 hours)",
-    category: "Veteran",
-  },
-  {
-    id: "business-automation",
-    title: "Automation for Veteran Businesses",
-    description: "Specialized automation strategies for veteran-owned businesses across different industries.",
-    level: "Beginner",
-    duration: "4 weeks (16 hours)",
-    category: "Veteran",
-  },
-  {
-    id: "military-to-tech",
-    title: "Military to Tech Transition",
-    description: "A comprehensive guide for veterans transitioning from military service to technology careers.",
-    level: "Beginner",
-    duration: "6 weeks (24 hours)",
-    category: "Veteran",
-  },
-  {
-    id: "veteran-funding",
-    title: "Funding Your Tech Business",
-    description: "Learn about funding opportunities specifically available for veteran entrepreneurs.",
-    level: "Intermediate",
-    duration: "4 weeks (16 hours)",
-    category: "Veteran",
-  },
-]
+import { allCourses as courses } from "@/data/courses"
 
 export default function CourseSyllabiIndex() {
   return (
@@ -93,7 +18,7 @@ export default function CourseSyllabiIndex() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {courses.map((course) => (
           <Card
-            key={course.id}
+            key={course.slug}
             className="bg-white/90 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-300"
           >
             <CardHeader>
@@ -134,7 +59,7 @@ export default function CourseSyllabiIndex() {
                 className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white"
                 asChild
               >
-                <Link href={`/learn/courses/syllabi?tab=${course.id}`}>
+                <Link href={`/learn/courses/${course.slug}/syllabus`}>
                   View Syllabus
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>

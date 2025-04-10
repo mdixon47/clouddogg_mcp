@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "Learn the basics of integrating your MCP server with Zapier to connect with thousands of applications.",
 }
 
-export default function IntroductionLessonPage() {
+export default async function IntroductionLessonPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900 text-gray-100">
       <div className="relative overflow-hidden">
