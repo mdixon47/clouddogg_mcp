@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Header from "@/components/header"
 import LessonNavigation from "@/components/learning/lesson-navigation"
 import LessonContent from "@/components/learning/zapier-course/lessons/introduction-content"
 import LessonProgress from "@/components/learning/lesson-progress"
@@ -15,7 +14,7 @@ export default async function IntroductionLessonPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900 text-gray-100">
       <div className="relative overflow-hidden">
-        <Header />
+        
         <main className="pt-20 pb-20">
           <LessonNavigation courseSlug="zapier-integration" lessonSlug="introduction" />
 

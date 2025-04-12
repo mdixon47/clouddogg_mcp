@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import Header from "@/components/header"
+
 import Footer from "@/components/footer"
 import CourseHeader from "@/components/learning/course-header"
 import CourseSidebar from "@/components/learning/course-sidebar"
@@ -24,7 +24,7 @@ export default async function CoursePage({ params }: { params: { courseSlug: str
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
 
-        <Header />
+     
         <main className="pt-32 pb-20 px-4 md:px-8">
           <div className="max-w-7xl mx-auto">
             <CourseHeader slug={courseSlug} />
@@ -43,7 +43,6 @@ export default async function CoursePage({ params }: { params: { courseSlug: str
             <RelatedCourses slug={courseSlug} />
           </div>
         </main>
-        <Footer />
       </div>
     </div>
   )

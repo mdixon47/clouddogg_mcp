@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Header from "@/components/header"
 import CourseHeader from "@/components/learning/course-header"
 import CourseSidebar from "@/components/learning/course-sidebar"
 import CourseContent from "@/components/learning/course-content"
@@ -23,7 +22,7 @@ export default function ZapierIntegrationCoursePage() {
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
 
-        <Header />
+    
         <main className="pt-32 pb-20 px-4 md:px-8">
           <div className="max-w-7xl mx-auto">
             <CourseHeader slug="zapier-integration" />

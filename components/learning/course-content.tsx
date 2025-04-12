@@ -7,11 +7,54 @@ import { Button } from "@/components/ui/button"
 import { ChevronDown, ChevronUp, Play, FileText, CheckCircle, Lock } from "lucide-react"
 import Link from "next/link"
 
-interface CourseContentProps {
-  slug: string
+// Add the import for the AI prompt engineering course components
+import AIPromptCourseOverview from "@/app/learn/courses/ai-prompt-course/ai-prompt-course-overview"
+import AIPromptCourseHighlights from "@/app/learn/courses/ai-prompt-course/ai-prompt-course-highlights"
+
+// In the CourseContent component, add a case for the AI prompt engineering course
+export default function CourseContent({ courseSlug }: { courseSlug: string }) {
+  switch (courseSlug) {
+    case "zapier-integration":
+      return (
+        <div>
+          {/* <ZapierCourseOverview />
+          <ZapierCourseHighlights />
+          <ZapierCourseRequirements /> */}
+        </div>
+      )
+    case "ai-prompt-engineering":
+      return (
+        <div>
+          <AIPromptCourseOverview />
+          <AIPromptCourseHighlights />
+        </div>
+      )
+    default:
+      return (
+        <div className="prose prose-invert max-w-none mb-12 light:prose-light">
+          <p>
+            This comprehensive course will guide you through everything you need to know about{" "}
+            {courseSlug?.split("-").join(" ") || "this course"}. From the fundamentals to advanced techniques, you'll gain practical
+            skills that you can apply immediately.
+          </p>
+          <p>
+            Our expert instructors, including veterans with real-world experience, will guide you through each module
+            with clear explanations, practical examples, and hands-on exercises.
+          </p>
+          <p>
+            By the end of this course, you'll have the knowledge and confidence to implement these skills in your own
+            business or career, whether you're a veteran entrepreneur or a professional looking to advance your skills.
+          </p>
+        </div>
+      )
+  }
 }
 
-export default function CourseContent({ slug }: CourseContentProps) {
+interface CourseContentProps {
+  courseSlug: string
+}
+
+function DefaultCourseContent({ courseSlug }: CourseContentProps) {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -246,7 +289,7 @@ export default function CourseContent({ slug }: CourseContentProps) {
                             asChild
                           >
                             <Link
-                              href={`/learn/courses/${slug}/lessons/${lesson.title.toLowerCase().replace(/\s+/g, "-")}`}
+                              href={`/learn/courses/${courseSlug}/lessons/${lesson.title.toLowerCase().replace(/\s+/g, "-")}`}
                             >
                               {lesson.isCompleted ? "Revisit" : "Preview"}
                             </Link>

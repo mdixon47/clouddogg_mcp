@@ -1,4 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+T# ☁️ CloudDogg MCP – AI Agent Services Platform
+
+CloudDogg MCP is a modular, AI-powered agent platform built for developers, founders, and veteran-owned businesses. It leverages **Model Context Protocol (MCP)**, **Google Gemini 2.5**, **OpenRouter**, and **Brave Search** to help users build intelligent AI tools—without needing to write code.
+
+From search engines and SEO audits to CRM connectors and proposal writers, CloudDogg MCP is the ultimate AI toolkit for building smarter, faster, and cheaper in the cloud.
+
+---
+
+## 🚀 Features
+
+- ✅ AI agents powered by Google Gemini and Brave Search
+- 🔄 Dynamic switching between API providers (Gemini, Claude, etc.)
+- 🔌 Ready-to-use MCP agents for Stripe, Discord, Shopify, and more
+- 🌐 Build real-time tools like search engines, content generators, and dashboards
+- 🧱 No-code setup inside Client (KleI) or VS Code
+- 🔐 Secure API key management via AWS Secrets Manager
+
+---
+
+## 🧠 What is MCP?
+
+**MCP (Model Context Protocol)** allows AI models to interact with APIs and tools in real-time through prompt-based workflows. Instead of coding logic manually, you define what the agent should do using simple instructions or natural language.
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer            | Tool/Tech                      |
+|------------------|--------------------------------|
+| AI Models        | Google Gemini 2.5, OpenRouter, Claude |
+| Search Layer     | Brave Search API (free quota)  |
+| Frontend (Basic) | HTML, TailwindCSS, AlpineJS    |
+| Frontend (Adv)   | Next.js, Vercel (optional)     |
+| Cloud Backend    | AWS Lambda, API Gateway, S3, Cognito |
+| DevOps           | GitHub Actions, Terraform (optional) |
+| Agent IDE        | Client (KleI) + CLAI plugin     |
+
+---
+
+## 📦 Installation
+
+### 1. Clone the Repo
+
+```bash
+git clone https://github.com/clouddogg/clouddogg-mcp.git
+cd clouddogg-mcp
 
 ## Getting Started
 
