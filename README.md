@@ -1,4 +1,4 @@
-T# ☁️ CloudDogg MCP – AI Agent Services Platform
+# ☁️ CloudDogg MCP – AI Agent Services Platform
 
 CloudDogg MCP is a modular, AI-powered agent platform built for developers, founders, and veteran-owned businesses. It leverages **Model Context Protocol (MCP)**, **Google Gemini 2.5**, **OpenRouter**, and **Brave Search** to help users build intelligent AI tools—without needing to write code.
 
