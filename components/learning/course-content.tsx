@@ -8,8 +8,8 @@ import { ChevronDown, ChevronUp, Play, FileText, CheckCircle, Lock } from "lucid
 import Link from "next/link"
 
 // Add the import for the AI prompt engineering course components
-import AIPromptCourseOverview from "@/app/learn/courses/ai-prompt-course/ai-prompt-course-overview"
-import AIPromptCourseHighlights from "@/app/learn/courses/ai-prompt-course/ai-prompt-course-highlights"
+import AIPromptCourseOverview from "@/components/learning/ai-prompt-course/ai-prompt-course-overview"
+import AIPromptCourseHighlights from "@/components/learning/ai-prompt-course/ai-prompt-course-highlights"
 
 // In the CourseContent component, add a case for the AI prompt engineering course
 export default function CourseContent({ courseSlug }: { courseSlug: string }) {

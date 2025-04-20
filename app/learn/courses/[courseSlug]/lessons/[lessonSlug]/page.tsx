@@ -1,49 +1,53 @@
 import type { Metadata } from "next"
-import Footer from "@/components/footer"
-import CourseHeader from "@/components/learning/course-header"
-import CourseSidebar from "@/components/learning/course-sidebar"
-import CourseContent from "@/components/learning/course-content"
-import CourseInstructor from "@/components/learning/course-instructor"
-import CourseReviews from "@/components/learning/course-reviews"
-import RelatedCourses from "@/components/learning/related-courses"
+import LessonContent from "@/components/learning/lesson-content"
+import LessonNavigation from "@/components/learning/lesson-navigation"
+import LessonResources from "@/components/learning/lesson-resources"
 
-export const metadata: Metadata = {
-  title: "MCP Server Fundamentals - CloudDogg Learning",
-  description: "Learn the fundamentals of Model Context Protocol servers and how to implement them in your business.",
+interface LessonPageProps {
+  params: {
+    courseSlug: string
+    lessonSlug: string
+  }
 }
 
-export default async function CoursePage({ params }: { params: { courseSlug: string } }) {
-  // Await the params object
-  const { courseSlug } = await params
+export const metadata: Metadata = {
+  title: "Lesson | CloudDogg Learning",
+  description: "Learn at your own pace with our comprehensive lessons.",
+}
 
+export default function LessonPage({ params: { courseSlug, lessonSlug } }: LessonPageProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900 text-gray-100">
-      <div className="relative overflow-hidden">
-        {/* Background glow effects */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
-
-        
-        <main className="pt-32 pb-20 px-4 md:px-8">
-          <div className="max-w-7xl mx-auto">
-            <CourseHeader courseSlug={courseSlug} />
-
-            <div className="flex flex-col lg:flex-row gap-8 mt-8">
-              <div className="lg:w-2/3">
-                <CourseContent courseSlug={courseSlug} />
-                <CourseInstructor courseSlug={courseSlug} />
-                <CourseReviews courseSlug={courseSlug} />
-              </div>
-              <div className="lg:w-1/3">
-                <CourseSidebar courseSlug={courseSlug} />
-              </div>
-            </div>
-
-            <RelatedCourses courseSlug={courseSlug} />
+    <div className="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900">
+      <main className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <div className="lg:col-span-1">
+            <LessonNavigation
+              courseSlug={courseSlug}
+              lessonSlug={lessonSlug}
+              moduleIndex={0}
+              lessonIndex={0}
+              totalModules={4}
+              totalLessons={12}
+              nextLesson={{
+                title: "Next Lesson",
+                slug: "next-lesson"
+              }}
+              prevLesson={null}
+              accentColor="purple"
+            />
           </div>
-        </main>
-        <Footer />
-      </div>
+          <div className="lg:col-span-3">
+            <LessonContent solutions={[
+              {
+                title: "Course Content",
+                description: "Interactive lessons and exercises",
+                icon: <div />
+              }
+            ]} />
+            <LessonResources courseSlug={courseSlug} lessonSlug={lessonSlug} />
+          </div>
+        </div>
+      </main>
     </div>
   )
 }
