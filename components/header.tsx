@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { ThemeToggle } from "./theme-toggle"
+import { Medal } from "lucide-react"
 
 export default function Header() {
   return (
@@ -31,6 +32,13 @@ export default function Header() {
             </Link>
             <Link href="/case-studies" className="text-gray-300 hover:text-white transition-colors">
               Case Studies
+            </Link>
+            <Link
+              href="/veteran-program"
+              className="flex items-center text-gray-300 hover:text-white transition-colors"
+            >
+              <Medal className="h-4 w-4 mr-1" />
+              Veterans
             </Link>
             <ThemeToggle />
             <Link
