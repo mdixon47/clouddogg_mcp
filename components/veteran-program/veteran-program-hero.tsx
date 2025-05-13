@@ -82,7 +82,7 @@ export default function VeteranProgramHero() {
                 className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white px-8 py-6 text-lg rounded-xl flex items-center"
                 asChild
               >
-                <Link href="/veteran-program/verification-status">Check Verification Status</Link>
+                <Link href="/veteran-program/verification-status">Check Status</Link>
               </Button>
             </div>
           </div>
