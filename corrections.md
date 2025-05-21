@@ -141,7 +141,7 @@ This document tracks corrections, known issues, and their solutions for the proj
       
 
 ## Recently Fixed
-- 2025-05-21: Fixed header clipping issue by adding padding and background clip properties (PR #XX)
+- 2025-05-21: Added .gitignore file (PR [#1](https://github.com/mdixon47/clouddogg_mcp/pull/1))
 
 ## References
 - https://tailwindcss.com/docs/background-clip
