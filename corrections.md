@@ -19,8 +19,7 @@ This document tracks corrections, known issues, and their solutions for the proj
         </span>
         ```
 
-### Medium Priority
-1. Light theme not applied for closing CTA block in closing-cta.tsx
+2. Light theme not applied for closing CTA block in closing-cta.tsx
     - Issue: Closing CTA block appears dark in light theme 
     - Solution: Setting default styles for light mode and overriding them with dark variants
     - Implementation:
@@ -48,7 +47,7 @@ This document tracks corrections, known issues, and their solutions for the proj
                 </div>
              ```           
 
-2. Redudant footer in how-it-works.tsx
+3. Redudant footer in how-it-works.tsx
     - Issue: Duplicate footer
     - Solution: Remove footer tag from page function
     - Implementation:
@@ -71,7 +70,128 @@ This document tracks corrections, known issues, and their solutions for the proj
             </div>
             </div>
         )
-        ```                    
+        ``` 
+    - Notes: Apply same solution wherever applicable    
+
+4. Content not visible in learning-hero.tsx
+    - Issue: When switched to light theme content still appears to be dark
+    - Solution: Setting default styles for light mode and overriding them with dark variants
+    - Implementation:
+        1. Course Card Background
+            ```tsx
+            <div className="relative bg-white/90 backdrop-blur-sm border border-gray-200 dark:bg-gray-800/60 dark:border-gray-700 rounded-3xl p-6 shadow-2xl">
+            ```
+        2. Course Card Book Icon Container
+            ```tsx
+            <div className="aspect-video rounded-xl overflow-hidden mb-4 bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+                <BookOpen className="h-16 w-16 text-blue-500 dark:text-blue-400 opacity-50" />
+            </div>
+            ```
+        3. Course Card Text Colors
+            ```tsx
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+            <span className="ml-2 text-gray-600 dark:text-gray-300 text-sm">
+            ```
+        4. Course Card Progress Bar Background
+            ```tsx
+            <div className="w-20 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            ```
+        5. Course Card Border Colors
+            ```tsx
+            <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+            ```
+        6. Tagline (Apply same solution for similar issue)
+            ```tsx
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/90 text-gray-300 dark:bg-blue-500/20 dark:text-blue-300 mb-6">
+              <Medal className="h-4 w-4 mr-2" />
+              <span className="text-sm font-medium">Veteran-Owned, Veteran-Focused</span>
+            </div>
+            ```            
+
+5. Content not visible in course-header.tsx
+    - Issue: When switched to light theme the course info content still appears to be dark
+    - Solution: Setting default styles for light mode and overriding them with dark variants
+    - Implementation:
+        ```tsx
+        <div className="bg-white/90 dark:bg-gray-800/60 backdrop-blur-sm border border-gray-700 rounded-xl p-6 shadow-xl">
+        ```
+        ```tsx
+        <Button variant="outline" className="w-full dark:border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white" asChild>
+            <Link href={`/learn/courses/${slug}/syllabus`}>View Syllabus</Link>
+        </Button>
+        ```
+
+### Medium Priority
+1. Featured course card content issues in closing-cta.tsx
+    - Issue: Course duration and level not appears to be dark even in light theme
+    - Solution: Setting default styles for light mode and overriding them with dark variants
+    - Implementation:
+        ```tsx
+         <div className="flex space-x-2">
+            <span className="px-2 py-1 bg-gray-300/50 dark:bg-gray-700/50 rounded-full text-xs text-gray-300">
+                {course.level}
+            </span>
+            <span className="px-2 py-1 bg-gray-300/50 dark:bg-gray-700/50 rounded-full text-xs text-gray-300">
+                {course.duration}
+            </span>
+        </div>
+        ```   
+    - Notes: Apply same solution for similar issues                    
+
+2. Data and components in same file
+    - Issue: Data required for the components is in the same file
+    - Solution: Move the data to seperate directory so that the data can be updated in future without touching the component code
+    - Implementation for MCP features data:
+        1. Inside `data` directory create `mcp-features.ts` file
+        2. Copy the `features` array into the file and export the array
+            ```tsx            
+            import { Workflow, Database, Calendar, MessageSquare, Users, Globe } from "lucide-react"
+
+            export const features = [
+                {
+                    title: "AI-Powered Workflow Automation",
+                    description: "Automate complex workflows across thousands of apps with natural language commands.",
+                    icon: Workflow,
+                    color: "from-blue-500 to-cyan-500",
+                },
+                {
+                    title: "Secure Database Integration",
+                    description: "Connect to Postgres and other databases with enterprise-grade security protocols.",
+                    icon: Database,
+                    color: "from-purple-500 to-pink-500",
+                },
+                {
+                    title: "Natural Language Scheduling & Messaging",
+                    description: "Let AI handle your calendar and communications with human-like understanding.",
+                    icon: Calendar,
+                    color: "from-amber-500 to-orange-500",
+                },
+                {
+                    title: "Social Media & Community Management",
+                    description: "Automate content creation, scheduling, and engagement across all platforms.",
+                    icon: Users,
+                    color: "from-green-500 to-emerald-500",
+                },
+                {
+                    title: "No-Code Web Scraping",
+                    description: "Extract and process data from any website without writing a single line of code.",
+                    icon: Globe,
+                    color: "from-red-500 to-rose-500",
+                },
+                {
+                    title: "Conversational AI Interface",
+                    description: "Talk to your AI in plain English and watch it execute complex tasks automatically.",
+                    icon: MessageSquare,
+                    color: "from-indigo-500 to-violet-500",
+                },
+            ]
+            ```
+        3. Import the features array in `features-section.tsx` file 
+            ```tsx
+            import { features } from "@/data/mcp-features"
+            ```
+    - Notes: Use the same solution for others         
 
 ### Low Priority
 1. Headers getting clipped
