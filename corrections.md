@@ -6,7 +6,100 @@ This document tracks corrections, known issues, and their solutions for the proj
 ## Current Issues and Solutions
 
 ### Critical
-- *No critical issues at this time.*
+1. Code incompatiable with Next.js 15 in `learn/courses/[courseSlug]/lessons/[lessonSlug]/page.tsx`
+    - Issue: `params` is not awaited before accessing its properties
+    - Solution: `params` should be awaited before using its properties
+    - Implementation: 
+        1. Update interface type
+            ```tsx
+            interface LessonPageProps {
+                params: Promise<{
+                    courseSlug: string
+                    lessonSlug: string
+                }>
+            }
+            ```  
+        2. Make component async
+            ```tsx
+            export default async function LessonPage({ params }: LessonPageProps) 
+            ```     
+        3.  Await params 
+            ```tsx
+            const { courseSlug, lessonSlug } = await params
+            ```       
+2. Route `/learn/courses/[courseSlug]/lessons/[lessonSlug]` is not rendering the page properly
+    - Issue: Component `learn/courses/[courseSlug]/lessons/[lessonSlug]/page.tsx` has improper visual cohesion
+    - Solution: Align the compents and use consistent theming
+    - Implementation:
+        ```tsx
+        return (
+            <div className="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900">
+            <LessonNavigation
+                courseSlug={courseSlug}
+                lessonSlug={lessonSlug}
+            />
+            <main className="container mx-auto px-4 py-12">
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <div className="lg:col-span-3">
+                    <LessonContent solutions={[
+                        {
+                        title: "Course Content",
+                        description: "Interactive lessons and exercises",
+                        icon: <div />
+                        }
+                    ]} />
+                    <LessonResources courseSlug={courseSlug} lessonSlug={lessonSlug} />
+                </div>
+                </div>
+            </main>
+            </div>
+        )
+        ``` 
+3. Code incompatiable with Next.js 15 in `/learn/courses/[courseSlug]/syllabus/page.tsx` 
+    - Issue: `params` is not awaited before accessing its properties
+    - Solution: `params` should be awaited before using its properties
+    - Implementation:
+        ```tsx
+       interface CoursePageProps {
+            params: Promise<{
+                courseSlug: string
+            }>
+        }
+
+        export default async function CoursePage({ params }: CoursePageProps) {
+            const { courseSlug } = await params
+
+            return (
+                <div className="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900 text-gray-100">
+                <div className="relative overflow-hidden">
+                    {/* Background glow effects */}
+                    <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+                    <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
+
+                
+                    <main className="pt-32 pb-20 px-4 md:px-8">
+                    <div className="max-w-7xl mx-auto">
+                        <CourseHeader slug={courseSlug} />
+
+                        <div className="flex flex-col lg:flex-row gap-8 mt-8">
+                        <div className="lg:w-2/3">
+                            <CourseContent courseSlug={courseSlug} />
+                            <CourseInstructor slug={courseSlug} />
+                            <CourseReviews slug={courseSlug} />
+                        </div>
+                        <div className="lg:w-1/3">
+                            <CourseSidebar slug={courseSlug} />
+                        </div>
+                        </div>
+
+                        <RelatedCourses slug={courseSlug} />
+                    </div>
+                    </main>
+                </div>
+                </div>
+            )
+        }
+        ``` 
 
 ### High Priority
 1. Logo not visible in footer.tsx
@@ -70,8 +163,7 @@ This document tracks corrections, known issues, and their solutions for the proj
             </div>
             </div>
         )
-        ``` 
-    - Notes: Apply same solution wherever applicable    
+        ```   
 
 4. Content not visible in learning-hero.tsx
     - Issue: When switched to light theme content still appears to be dark
@@ -122,6 +214,202 @@ This document tracks corrections, known issues, and their solutions for the proj
         </Button>
         ```
 
+6. Form validation missing
+    - Issue: No validation for form fields in veteran-program-application-form.tsx
+    - Solution: Add client side validation for each form field with proper error messages
+    - Implementation:
+        1. Add FormData interface
+            ```tsx
+            interface FormData {
+                firstName: string
+                lastName: string
+                email: string
+                phone: string
+                branch: string
+                status: string
+                yearsOfService: string
+                skills: string
+                verificationFile: File | null
+                comments: string
+                terms: boolean
+            }
+            ```
+        2. Add FormErrors interface for error indication
+            ```tsx
+            interface FormErrors {
+                [key: string]: string
+            }
+            ```
+        3. Add centralized state management for FormData and FormErrors
+            ```tsx
+            const [errors, setErrors] = useState<FormErrors>({})
+            const [formData, setFormData] = useState<FormData>({
+                firstName: '',
+                lastName: '',
+                email: '',
+                phone: '',
+                branch: '',
+                status: '',
+                yearsOfService: '',
+                skills: '',
+                verificationFile: null,
+                comments: '',
+                terms: false
+            })
+            ```
+        4. Add regex to validate form fields
+            ```tsx
+            const validateEmail = (email: string): boolean => {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                return emailRegex.test(email)
+            }
+
+            const validatePhone = (phone: string): boolean => {
+                const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/
+                const cleanPhone = phone.replace(/[^\d+]/g, '')
+                return cleanPhone.length >= 10 && phoneRegex.test(cleanPhone)
+            }
+
+            const validateFirstName = (firstName: string): boolean => {
+                const firstNameRegex = /^[a-zA-Z]+$/
+                return firstNameRegex.test(firstName)
+            }
+            ```
+        5. Validate each field of form for each step
+            ```tsx
+            const validateStep1 = (): boolean => {
+                const newErrors: FormErrors = {}
+
+                if (!formData.firstName.trim()) {
+                    newErrors.firstName = 'First name is required'
+                    } else if (!validateFirstName(formData.firstName)) {
+                    newErrors.firstName = 'First name is required'
+                    } else if (formData.firstName.trim().length < 2) {
+                    newErrors.firstName = 'Please enter a valid first name'
+                }
+
+                if (!formData.lastName.trim()) {
+                    newErrors.lastName = 'Last name is required'
+                    } else if (formData.lastName.trim().length < 2) {
+                    newErrors.lastName = 'Last name must be at least 2 characters'
+                }
+
+                if (!formData.email.trim()) {
+                    newErrors.email = 'Email is required'
+                    } else if (!validateEmail(formData.email)) {
+                    newErrors.email = 'Please enter a valid email address'
+                }
+
+                if (formData.phone && !validatePhone(formData.phone)) {
+                    newErrors.phone = 'Please enter a valid phone number'
+                }
+
+                setErrors(newErrors)
+                    return Object.keys(newErrors).length === 0
+            }
+
+            const validateStep2 = (): boolean => {
+                const newErrors: FormErrors = {}
+
+                if (!formData.branch) {
+                    newErrors.branch = 'Please select your branch of service'
+                }
+
+                if (!formData.status) {
+                    newErrors.status = 'Please select your current status'
+                }
+
+                if (!formData.yearsOfService) {
+                    newErrors.yearsOfService = 'Years of service is required'
+                    } else {
+                    const years = parseInt(formData.yearsOfService)
+                    if (isNaN(years) || years < 0 || years > 40) {
+                        newErrors.yearsOfService = 'Please enter a valid number of years (0-40)'
+                    }
+                }
+
+                setErrors(newErrors)
+                return Object.keys(newErrors).length === 0
+            }
+
+            const validateStep3 = (): boolean => {
+                const newErrors: FormErrors = {}
+
+                if (!formData.verificationFile) {
+                    newErrors.verificationFile = 'Please upload a verification document'
+                    } else {
+                    if (formData.verificationFile.size > 10 * 1024 * 1024) {
+                        newErrors.verificationFile = 'File size must be less than 10MB'
+                }
+                
+                const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png']
+                if (!allowedTypes.includes(formData.verificationFile.type)) {
+                    newErrors.verificationFile = 'Please upload a PDF, JPG, or PNG file'
+                }
+                }
+
+                if (!formData.terms) {
+                    newErrors.terms = 'You must agree to the terms and conditions'
+                }
+
+                setErrors(newErrors)
+                return Object.keys(newErrors).length === 0
+            }
+
+            const handleInputChange = (field: keyof FormData, value: string | boolean | File | null) => {
+                setFormData(prev => ({ ...prev, [field]: value }))
+                if (errors[field]) {
+                    setErrors(prev => ({ ...prev, [field]: '' }))
+                }
+            }
+
+            const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+                const file = e.target.files?.[0] || null
+                handleInputChange('verificationFile', file)
+            }
+
+            const handleNext = (currentStep: number) => {
+                let isValid = false
+                
+                switch (currentStep) {
+                case 1:
+                    isValid = validateStep1()
+                    break
+                case 2:
+                    isValid = validateStep2()
+                    break
+                default:
+                    isValid = true
+                }
+
+                if (isValid) {
+                setStep(currentStep + 1)
+                }
+            }
+            ```
+        6. Add function to display error message for field validation and invoke it from each field
+            ```tsx
+            const ErrorMessage = ({ error }: { error: string }) => (
+                <div className="flex items-center mt-1 text-red-600 dark:text-red-400 text-sm">
+                <AlertCircle className="h-4 w-4 mr-1" />
+                {error}
+                </div>
+            )
+
+            
+            ```
+        7. Invoke `ErrorMessage` function from each form input field
+            ```tsx
+            <Input 
+                id="firstName" 
+                placeholder="John" 
+                value={formData.firstName}
+                onChange={(e) => handleInputChange('firstName', e.target.value)}
+                className={errors.firstName ? 'border-red-500 focus:border-red-500' : ''}
+            />
+            {errors.firstName && <ErrorMessage error={errors.firstName} />}
+            ```                            
+
 ### Medium Priority
 1. Featured course card content issues in closing-cta.tsx
     - Issue: Course duration and level not appears to be dark even in light theme
@@ -136,8 +424,7 @@ This document tracks corrections, known issues, and their solutions for the proj
                 {course.duration}
             </span>
         </div>
-        ```   
-    - Notes: Apply same solution for similar issues                    
+        ```                  
 
 2. Data and components in same file
     - Issue: Data required for the components is in the same file
@@ -190,8 +477,7 @@ This document tracks corrections, known issues, and their solutions for the proj
         3. Import the features array in `features-section.tsx` file 
             ```tsx
             import { features } from "@/data/mcp-features"
-            ```
-    - Notes: Use the same solution for others         
+            ```      
 
 ### Low Priority
 1. Headers getting clipped
@@ -202,8 +488,7 @@ This document tracks corrections, known issues, and their solutions for the proj
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-gray-900 via-blue-800 to-cyan-700 dark:from-white dark:via-blue-100 dark:to-cyan-200 bg-clip-text bg-clip-padding p-3 text-transparent mb-6">
             Connect Your AI to Everything. Automate Anything.
         </h1>
-        ```
-    - Notes: Use the same solution for all other hearders having clipping issues    
+        ``` 
 
 2. Incorrect heading in how-it-works-section.tsx
     - Issue: Incorrect title `How CloudDogg Works`
@@ -251,14 +536,45 @@ This document tracks corrections, known issues, and their solutions for the proj
         </Button>
         ```
 
-6. Missing border for `View Pricing` button in closing-cta.tsx
-    - Issue:
-    - Solution:
+6. Missing aria-lables
+    - Issue: No aria-lables, making it difficult for screen reader users to understand the purpose of different sections and interactive elements
+    - Solution: Add Semantic `aria-label` and hide icons and animations from screen readers by using `aira-hidden=true`
     - Implementation:
         ```tsx
+        <section className="pt-32 pb-20 px-4 md:px-8 relative" aria-label="Hero section">
+
+        <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
         ```
-        
-      
+7. Don't Repeat Yourself
+    - Issue: Long Tailwind class strings and repetitive animation classes can become difficult to manage
+    - Solution: Extract CSS Classes into Variables
+    - Implementation:
+        ```tsx
+        const headingClasses = "text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-gray-900 via-blue-800 to-cyan-700 dark:from-white dark:via-blue-100 dark:to-cyan-200 bg-clip-text text-transparent mb-6"
+        const primaryButtonClasses = "bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white px-8 py-6 text-lg rounded-xl shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-1"
+
+        <Button className={primaryButtonClasses} aria-label="Book a free demonstration">
+        ```
+8. Lack of cleanup function
+    - Issue: Lack of a cleanup function which could lead to memory leaks if the component unmounted while animations were still in progress
+    - Solution: Add a useRef Hook for component mounting status
+    - Implementation:
+        ```tsx
+        const isMounted = useRef(false)
+
+        useEffect(() => {
+            isMounted.current = true
+            setIsVisible(true)
+            
+            return () => {
+                isMounted.current = false
+            }
+        }, [])
+        ```
+
+## Implementation Notes
+- Replace the faulty code with the code given in implementation for each issue 
+- Apply the solution given in this file for similar issues wherever applicable      
 
 ## Recently Fixed
 - 2025-05-21: Added .gitignore file (PR [#1](https://github.com/mdixon47/clouddogg_mcp/pull/1))
@@ -267,6 +583,8 @@ This document tracks corrections, known issues, and their solutions for the proj
 - https://tailwindcss.com/docs/background-clip
 - https://tailwindcss.com/docs/top-right-bottom-left
 - https://tailwindcss.com/docs/dark-mode
+- https://nextjs.org/docs/messages/sync-dynamic-apis
+- https://nextjs.org/docs/app/guides/upgrading/version-15
 
 ---
-Last updated: May 21, 2025
+Last updated: May 22, 2025
