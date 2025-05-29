@@ -21,7 +21,6 @@ export default function HowItWorksPage() {
           <HowItWorksFAQ />
           <ClosingCTA />
         </main>
-        <Footer />
       </div>
     </div>
   )

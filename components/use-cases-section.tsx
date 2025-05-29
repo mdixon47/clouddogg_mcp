@@ -87,7 +87,7 @@ export default function UseCasesSection() {
 
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text bg-clip-padding p-3 text-transparent">
             Transforming Industries with AI Automation
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">

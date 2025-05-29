@@ -42,7 +42,7 @@ export default function HowItWorksSection() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
-            How CloudDogg Works
+            How CloudDogg MCP Works
           </h2>
           <p className="text-xl text-gray-700 dark:text-gray-400 max-w-3xl mx-auto">
             Get started in minutes with our simple three-step process.
@@ -81,9 +81,9 @@ export default function HowItWorksSection() {
           <div className="hidden md:block">
             {inView && (
               <>
-                <div className="absolute top-1/2 left-1/6 w-3 h-3 rounded-full bg-blue-500 transform -translate-y-1/2 animate-ping"></div>
+                <div className="absolute top-1/2 left-0 w-3 h-3 rounded-full bg-blue-500 transform -translate-y-1/2 animate-ping"></div>
                 <div className="absolute top-1/2 left-1/2 w-3 h-3 rounded-full bg-purple-500 transform -translate-y-1/2 animate-ping animation-delay-300"></div>
-                <div className="absolute top-1/2 left-5/6 w-3 h-3 rounded-full bg-green-500 transform -translate-y-1/2 animate-ping animation-delay-600"></div>
+                <div className="absolute top-1/2 left-full w-3 h-3 rounded-full bg-green-500 transform -translate-y-1/2 animate-ping animation-delay-600"></div>
               </>
             )}
           </div>

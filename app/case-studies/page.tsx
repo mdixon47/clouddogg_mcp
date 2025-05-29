@@ -116,8 +116,6 @@ export default function CaseStudiesPage() {
             </div>
           </div>
         </main>
-
-        <Footer />
       </div>
     </div>
   )

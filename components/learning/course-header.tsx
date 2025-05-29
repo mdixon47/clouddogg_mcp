@@ -78,7 +78,7 @@ export default function CourseHeader({ slug }: CourseHeaderProps) {
         </div>
 
         <div className="md:w-1/3">
-          <div className="bg-gray-800/60 backdrop-blur-sm border border-gray-700 rounded-xl p-6 shadow-xl">
+          <div className="bg-white/90 dark:bg-gray-800/60 backdrop-blur-sm border border-gray-700 rounded-xl p-6 shadow-xl">
             <div className="aspect-video rounded-lg overflow-hidden mb-6 bg-gray-900 flex items-center justify-center">
               <Server className="h-16 w-16 text-blue-400 opacity-50" />
             </div>
@@ -93,7 +93,7 @@ export default function CourseHeader({ slug }: CourseHeaderProps) {
 
               <Button
                 variant="outline"
-                className="w-full border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
+                className="w-full dark:border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
                 asChild
               >
                 <Link href={`/learn/courses/${slug}/syllabus`}>View Syllabus</Link>

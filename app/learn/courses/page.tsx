@@ -32,7 +32,7 @@ export default function ZapierIntegrationCoursePage() {
                 <ZapierCourseOverview />
                 <ZapierCourseHighlights />
                 <ZapierCourseRequirements />
-                <CourseContent slug="zapier-integration" />
+                <CourseContent courseSlug="zapier-integration" />
                 <CourseInstructor slug="zapier-integration" />
                 <CourseReviews slug="zapier-integration" />
               </div>
