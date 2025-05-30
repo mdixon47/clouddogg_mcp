@@ -24,8 +24,8 @@ export default function AuthForm() {
       <AuthTabsHandler setActiveTab={setActiveTab} />
       <div className="p-6">
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-white dark:via-blue-100 dark:to-cyan-200 bg-clip-text text-transparent">
-            Welcome to CloudDogg
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent">
+            Welcome to CloudDogg MCP
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">
             {activeTab === "login" ? "Sign in to your account to continue" : "Create an account to get started"}

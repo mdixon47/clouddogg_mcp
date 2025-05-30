@@ -67,8 +67,8 @@ export default function RelatedCourses({ slug }: RelatedCoursesProps) {
                     <course.icon className="h-6 w-6 text-white" />
                   </div>
                   <div className="flex space-x-2">
-                    <span className="px-2 py-1 bg-gray-700/50 rounded-full text-xs text-gray-300">{course.level}</span>
-                    <span className="px-2 py-1 bg-gray-700/50 rounded-full text-xs text-gray-300">
+                    <span className="px-2 py-1 bg-gray-300/50 dark:bg-gray-700/50 rounded-full text-xs text-gray-300">{course.level}</span>
+                    <span className="px-2 py-1 bg-gray-300/50 dark:bg-gray-700/50 rounded-full text-xs text-gray-300">
                       {course.duration}
                     </span>
                   </div>

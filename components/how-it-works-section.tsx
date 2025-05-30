@@ -1,33 +1,7 @@
 "use client"
 
 import { useInView } from "react-intersection-observer"
-import { Server, Zap, MessageCircle } from "lucide-react"
-
-const steps = [
-  {
-    id: 1,
-    title: "Create your MCP Server",
-    description:
-      "Set up your secure Model Context Protocol server in minutes. Connect to your existing tools and data sources.",
-    icon: Server,
-    color: "from-blue-500 to-cyan-500",
-  },
-  {
-    id: 2,
-    title: "Add AI-Driven Zapier Actions",
-    description: "Connect to thousands of apps through Zapier and define custom actions your AI can perform.",
-    icon: Zap,
-    color: "from-purple-500 to-pink-500",
-  },
-  {
-    id: 3,
-    title: "Talk to your AI – it gets it done",
-    description:
-      "Simply tell your AI what you need in plain language. It understands context and executes the right actions.",
-    icon: MessageCircle,
-    color: "from-green-500 to-emerald-500",
-  },
-]
+import { steps } from "@/data/how-it-works-steps"
 
 export default function HowItWorksSection() {
   const { ref, inView } = useInView({
@@ -41,7 +15,7 @@ export default function HowItWorksSection() {
 
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text bg-clip-padding p-1 text-transparent">
             How CloudDogg MCP Works
           </h2>
           <p className="text-xl text-gray-700 dark:text-gray-400 max-w-3xl mx-auto">

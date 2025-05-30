@@ -1,4 +1,3 @@
-import Footer from "@/components/footer"
 import HowItWorksHero from "@/components/how-it-works-hero"
 import HowItWorksSteps from "@/components/how-it-works-steps"
 import HowItWorksTechnical from "@/components/how-it-works-technical"

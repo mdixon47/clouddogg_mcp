@@ -16,11 +16,11 @@ export default function AIPromptCourseOverview() {
             </div>
             <p className="text-gray-300 light:text-gray-600">{aiPromptEngineering.duration}</p>
             <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
-              <div className="bg-gray-700/50 p-2 rounded light:bg-gray-100">
+              <div className="dark:bg-gray-700/50 p-2 rounded bg-gray-300/50">
                 <span className="block text-gray-400 light:text-gray-500">Modules</span>
                 <span className="text-white font-medium light:text-gray-800">{aiPromptEngineering.modules.length}</span>
               </div>
-              <div className="bg-gray-700/50 p-2 rounded light:bg-gray-100">
+              <div className="dark:bg-gray-700/50 p-2 rounded bg-gray-300/50">
                 <span className="block text-gray-400 light:text-gray-500">Total Lessons</span>
                 <span className="text-white font-medium light:text-gray-800">
                   {aiPromptEngineering.modules.reduce((total, module) => total + module.lessons.length, 0)}

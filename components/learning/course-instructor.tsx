@@ -74,7 +74,7 @@ export default function CourseInstructor({ slug }: CourseInstructorProps) {
               <h4 className="text-lg font-medium mb-3 text-white">Areas of Expertise</h4>
               <div className="flex flex-wrap gap-2 mb-6">
                 {instructor.expertise.map((area, index) => (
-                  <span key={index} className="px-3 py-1 bg-gray-700/50 rounded-full text-sm text-gray-300">
+                  <span key={index} className="px-3 py-1 bg-gray-300/50 dark:bg-gray-700/50 rounded-full text-sm text-gray-300">
                     {area}
                   </span>
                 ))}

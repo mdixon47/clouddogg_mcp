@@ -19,12 +19,14 @@ export default function LearningHero() {
           <div
             className={`md:w-1/2 transition-all duration-1000 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
           >
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/90 text-gray-300 dark:bg-blue-500/20 dark:text-blue-300 mb-6">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-500 dark:bg-blue-900/50 dark:text-blue-300">
               <Medal className="h-4 w-4 mr-2" />
               <span className="text-sm font-medium">Veteran-Owned, Veteran-Focused</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-white via-blue-100 to-cyan-200 bg-clip-text text-transparent mb-6">
-              Master MCP Servers & AI Automation
+              Master MCP Servers 
+              <br/> 
+              & AI Automation
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8">
               Specialized training for veteran entrepreneurs to leverage cutting-edge technology in their businesses.

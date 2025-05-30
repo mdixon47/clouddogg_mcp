@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import Header from "@/components/header"
-import Footer from "@/components/footer"
 import CourseSidebar from "@/components/learning/course-sidebar"
 import CourseContent from "@/components/learning/course-content"
 import CourseInstructor from "@/components/learning/course-instructor"
@@ -26,7 +25,7 @@ export default function AIPromptEngineeringCoursePage() {
         <main className="pt-32 pb-20 px-4 md:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="mb-12">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-400 via-emerald-300 to-teal-400 bg-clip-text text-transparent dark:from-green-400 dark:via-emerald-300 dark:to-teal-400 light:from-green-600 light:via-emerald-500 light:to-teal-600">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-400 via-emerald-300 to-teal-400 bg-clip-text bg-clip-paadding p-2 text-transparent dark:from-green-400 dark:via-emerald-300 dark:to-teal-400 light:from-green-600 light:via-emerald-500 light:to-teal-600">
                 {aiPromptEngineering.title}
               </h1>
               <p className="text-xl text-gray-300 max-w-3xl light:text-gray-700">{aiPromptEngineering.description}</p>

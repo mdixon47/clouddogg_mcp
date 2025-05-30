@@ -3,14 +3,7 @@
 import { useInView } from "react-intersection-observer"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, CheckCircle } from "lucide-react"
-
-const benefits = [
-  "No credit card required",
-  "Free 14-day trial",
-  "Unlimited automations",
-  "Priority support",
-  "Cancel anytime",
-]
+import{ benefits } from "@/data/closing-cta-benefits"
 
 export default function ClosingCTA() {
   const { ref, inView } = useInView({
@@ -38,7 +31,7 @@ export default function ClosingCTA() {
 
         <div className="relative z-10">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-800 via-blue-600 to-cyan-600 dark:from-white dark:via-blue-100 dark:to-cyan-200 bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-800 via-blue-600 to-cyan-600 dark:from-white dark:via-blue-100 dark:to-cyan-200 bg-clip-text bg-clip-padding p-1 text-transparent">
               Start Automating Smarter, Today.
             </h2>
             <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">

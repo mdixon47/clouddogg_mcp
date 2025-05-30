@@ -11,19 +11,16 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Medal, Upload, CheckCircle, AlertCircle } from "lucide-react"
 
 interface FormData {
-  // Personal Information
   firstName: string
   lastName: string
   email: string
   phone: string
   
-  // Military Service
   branch: string
   status: string
   yearsOfService: string
   skills: string
   
-  // Verification
   verificationFile: File | null
   comments: string
   terms: boolean
@@ -52,7 +49,6 @@ export default function VeteranProgramApplicationForm() {
     terms: false
   })
 
-  // Validation functions
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return emailRegex.test(email)
@@ -130,12 +126,10 @@ export default function VeteranProgramApplicationForm() {
     if (!formData.verificationFile) {
       newErrors.verificationFile = 'Please upload a verification document'
     } else {
-      // Validate file size (10MB max)
       if (formData.verificationFile.size > 10 * 1024 * 1024) {
         newErrors.verificationFile = 'File size must be less than 10MB'
       }
       
-      // Validate file type
       const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png']
       if (!allowedTypes.includes(formData.verificationFile.type)) {
         newErrors.verificationFile = 'Please upload a PDF, JPG, or PNG file'
@@ -152,7 +146,6 @@ export default function VeteranProgramApplicationForm() {
 
   const handleInputChange = (field: keyof FormData, value: string | boolean | File | null) => {
     setFormData(prev => ({ ...prev, [field]: value }))
-    // Clear error when user starts typing
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }))
     }
@@ -192,7 +185,6 @@ export default function VeteranProgramApplicationForm() {
     setIsSubmitting(true)
 
     try {
-      // Create FormData for file upload
       const submitData = new FormData()
       Object.entries(formData).forEach(([key, value]) => {
         if (value instanceof File) {
@@ -202,7 +194,6 @@ export default function VeteranProgramApplicationForm() {
         }
       })
 
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500))
 
       setIsSubmitting(false)
@@ -260,15 +251,15 @@ export default function VeteranProgramApplicationForm() {
               {/* Progress Indicator */}
               <div className="flex justify-between items-center mb-8">
                 <div className="flex space-x-2">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 1 ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 1 ? 'bg-blue-600 dark:bg-blue-600 dark:text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'}`}>
                     1
                   </div>
                   <div className={`w-16 h-1 mt-3.5 ${step >= 2 ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-700'}`}></div>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 2 ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 2 ? 'bg-blue-600 dark:bg-blue-600 dark:text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'}`}>
                     2
                   </div>
                   <div className={`w-16 h-1 mt-3.5 ${step >= 3 ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-700'}`}></div>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 3 ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 3 ? 'bg-blue-600 dark:bg-blue-600 dark:text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'}`}>
                     3
                   </div>
                 </div>

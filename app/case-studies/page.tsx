@@ -1,65 +1,7 @@
 import Header from "@/components/header"
-import Footer from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { Home, HeartPulse, Store, Rocket, Briefcase, Landmark } from "lucide-react"
-
-const caseStudies = [
-  {
-    id: "real-estate",
-    title: "Real Estate",
-    subtitle: "How Prestige Real Estate Group Increased Productivity by 68%",
-    description: "Transforming agent productivity and client experience through intelligent automation",
-    icon: Home,
-    color: "from-blue-500 to-cyan-500",
-    path: "/case-studies/real-estate",
-  },
-  {
-    id: "healthcare",
-    title: "Healthcare",
-    subtitle: "How Cornerstone Health Partners Reduced No-Shows by 72%",
-    description: "Transforming patient engagement and practice efficiency while maintaining HIPAA compliance",
-    icon: HeartPulse,
-    color: "from-green-500 to-teal-500",
-    path: "/case-studies/healthcare",
-  },
-  {
-    id: "local-business",
-    title: "Local Business",
-    subtitle: "How Riverside Craft Supply Increased Revenue by 47%",
-    description: "Helping a small local retailer compete with national chains through intelligent automation",
-    icon: Store,
-    color: "from-amber-500 to-orange-500",
-    path: "/case-studies/local-business",
-  },
-  {
-    id: "startups",
-    title: "Startups",
-    subtitle: "How TechLaunch Scaled Operations Without Adding Headcount",
-    description: "Enabling rapid growth through comprehensive workflow automation",
-    icon: Rocket,
-    color: "from-purple-500 to-pink-500",
-    path: "/case-studies/startups",
-  },
-  {
-    id: "financial",
-    title: "Financial Services",
-    subtitle: "How Heritage Financial Advisors Streamlined Client Onboarding",
-    description: "Reducing compliance overhead while enhancing the client experience",
-    icon: Briefcase,
-    color: "from-indigo-500 to-blue-500",
-    path: "/case-studies/financial",
-  },
-  {
-    id: "government",
-    title: "Government",
-    subtitle: "How Westlake City Improved Citizen Services Response Time",
-    description: "Modernizing municipal services through intelligent automation",
-    icon: Landmark,
-    color: "from-red-500 to-rose-500",
-    path: "/case-studies/government",
-  },
-]
+import { caseStudies } from "@/data/case-studies"
 
 export default function CaseStudiesPage() {
   return (
