@@ -19,12 +19,14 @@ export default function LearningHero() {
           <div
             className={`md:w-1/2 transition-all duration-1000 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
           >
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 mb-6">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-500 dark:bg-blue-900/50 dark:text-blue-300">
               <Medal className="h-4 w-4 mr-2" />
               <span className="text-sm font-medium">Veteran-Owned, Veteran-Focused</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-white via-blue-100 to-cyan-200 bg-clip-text text-transparent mb-6">
-              Master MCP Servers & AI Automation
+              Master MCP Servers 
+              <br/> 
+              & AI Automation
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8">
               Specialized training for veteran entrepreneurs to leverage cutting-edge technology in their businesses.
@@ -69,12 +71,12 @@ export default function LearningHero() {
           >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-3xl blur-xl opacity-20 animate-pulse"></div>
-              <div className="relative bg-gray-800/60 backdrop-blur-sm border border-gray-700 rounded-3xl p-6 shadow-2xl">
-                <div className="aspect-video rounded-xl overflow-hidden mb-4 bg-gray-900 flex items-center justify-center">
-                  <BookOpen className="h-16 w-16 text-blue-400 opacity-50" />
+              <div className="relative bg-white/90 backdrop-blur-sm border border-gray-200 dark:bg-gray-800/60 dark:border-gray-700 rounded-3xl p-6 shadow-2xl">
+                <div className="aspect-video rounded-xl overflow-hidden mb-4 bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+                  <BookOpen className="h-16 w-16 text-blue-500 dark:text-blue-400 opacity-50" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">MCP Server Fundamentals</h3>
-                <p className="text-gray-300 mb-4">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">MCP Server Fundamentals</h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-4">
                   Learn the core concepts of Model Context Protocol servers and how they enable AI automation across
                   thousands of apps.
                 </p>
@@ -87,12 +89,12 @@ export default function LearningHero() {
                   </div>
                   <div className="text-sm text-gray-400">12 Lessons</div>
                 </div>
-                <div className="mt-4 pt-4 border-t border-gray-700 flex justify-between items-center">
+                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
                   <div className="flex items-center">
-                    <div className="w-20 h-2 bg-gray-700 rounded-full overflow-hidden">
+                    <div className="w-20 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                       <div className="w-3/4 h-full bg-gradient-to-r from-blue-500 to-cyan-500"></div>
                     </div>
-                    <span className="ml-2 text-gray-400 text-sm">75% Complete</span>
+                    <span className="ml-2 text-gray-600 dark:text-gray-400 text-sm">75% Complete</span>
                   </div>
                   <Button
                     size="sm"

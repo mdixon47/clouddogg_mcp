@@ -3,66 +3,8 @@
 import { useState } from "react"
 import { useInView } from "react-intersection-observer"
 import { Button } from "@/components/ui/button"
-import { Home, HeartPulse, Store, Rocket, ChevronLeft, ChevronRight } from "lucide-react"
-
-const useCases = [
-  {
-    id: "real-estate",
-    title: "Real Estate",
-    icon: Home,
-    color: "from-blue-500 to-cyan-500",
-    description:
-      "Automate lead nurturing, property matching, and transaction management. CloudDogg helps agents focus on relationships while AI handles the paperwork.",
-    benefits: [
-      "Automated property listing updates across platforms",
-      "AI-powered lead qualification and follow-up",
-      "Smart scheduling for showings and open houses",
-      "Document generation and transaction tracking",
-    ],
-  },
-  {
-    id: "healthcare",
-    title: "Healthcare",
-    icon: HeartPulse,
-    color: "from-green-500 to-teal-500",
-    description:
-      "Streamline patient communications, appointment scheduling, and administrative tasks while maintaining HIPAA compliance and data security.",
-    benefits: [
-      "HIPAA-compliant patient communication automation",
-      "Intelligent appointment scheduling and reminders",
-      "Automated insurance verification workflows",
-      "Secure document processing and management",
-    ],
-  },
-  {
-    id: "local-business",
-    title: "Local Businesses",
-    icon: Store,
-    color: "from-amber-500 to-orange-500",
-    description:
-      "Help small businesses compete with enterprise-level automation. From appointment booking to customer follow-ups, CloudDogg levels the playing field.",
-    benefits: [
-      "Customer review management and response automation",
-      "Inventory tracking and reordering workflows",
-      "Personalized marketing campaigns at scale",
-      "Streamlined booking and reservation systems",
-    ],
-  },
-  {
-    id: "startups",
-    title: "Startups",
-    icon: Rocket,
-    color: "from-purple-500 to-pink-500",
-    description:
-      "Scale operations without scaling headcount. CloudDogg helps startups automate repetitive tasks so founders can focus on growth and innovation.",
-    benefits: [
-      "Automated customer onboarding sequences",
-      "Lead qualification and sales pipeline automation",
-      "Investor updates and reporting workflows",
-      "Cross-platform social media management",
-    ],
-  },
-]
+import { useCases } from "@/data/mcp-use-cases"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 export default function UseCasesSection() {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -87,7 +29,7 @@ export default function UseCasesSection() {
 
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text bg-clip-padding p-3 text-transparent">
             Transforming Industries with AI Automation
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">

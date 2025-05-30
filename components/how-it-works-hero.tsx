@@ -17,8 +17,8 @@ export default function HowItWorksHero() {
         <div
           className={`text-center transition-all duration-1000 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-white via-blue-100 to-cyan-200 bg-clip-text text-transparent mb-6">
-            How CloudDogg Works
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-white via-blue-100 to-cyan-200 bg-clip-text bg-clip-padding p-3 text-transparent mb-6">
+            How CloudDogg MCP Works
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
             Discover how our AI automation platform connects your business to thousands of apps through Zapier's Model

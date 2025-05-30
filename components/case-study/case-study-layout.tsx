@@ -1,6 +1,5 @@
 import type { ReactNode } from "react"
 import Header from "@/components/header"
-import Footer from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import Link from "next/link"
@@ -101,8 +100,6 @@ export default function CaseStudyLayout({
             </div>
           </div>
         </main>
-
-        <Footer />
       </div>
     </div>
   )

@@ -20,7 +20,6 @@ export default function VeteranProgramApplyPage() {
         <main className="pt-16">
           <VeteranProgramApplicationForm />
         </main>
-        <Footer />
       </div>
     </div>
   )

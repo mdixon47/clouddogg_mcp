@@ -15,7 +15,7 @@ export default async function IntroductionLessonPage() {
     <div className="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900 text-gray-100">
       <div className="relative overflow-hidden">
         
-        <main className="pt-20 pb-20">
+        {/* <main className="pt-20 pb-20">
           <LessonNavigation courseSlug="zapier-integration" lessonSlug="introduction" />
 
           <div className="px-4 md:px-8 py-8">
@@ -27,7 +27,7 @@ export default async function IntroductionLessonPage() {
           </div>
 
           <LessonProgress courseSlug="zapier-integration" lessonSlug="introduction" />
-        </main>
+        </main> */}
       </div>
     </div>
   )

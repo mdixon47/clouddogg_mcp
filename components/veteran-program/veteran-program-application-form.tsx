@@ -8,23 +8,208 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
-import { Medal, Upload, CheckCircle } from "lucide-react"
+import { Medal, Upload, CheckCircle, AlertCircle } from "lucide-react"
+
+interface FormData {
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  
+  branch: string
+  status: string
+  yearsOfService: string
+  skills: string
+  
+  verificationFile: File | null
+  comments: string
+  terms: boolean
+}
+
+interface FormErrors {
+  [key: string]: string
+}
 
 export default function VeteranProgramApplicationForm() {
   const [step, setStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [formData, setFormData] = useState<FormData>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    branch: '',
+    status: '',
+    yearsOfService: '',
+    skills: '',
+    verificationFile: null,
+    comments: '',
+    terms: false
+  })
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+  }
+
+  const validatePhone = (phone: string): boolean => {
+    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/
+    const cleanPhone = phone.replace(/[^\d+]/g, '')
+    return cleanPhone.length >= 10 && phoneRegex.test(cleanPhone)
+  }
+
+  const validateFirstName = (firstName: string): boolean => {
+    const firstNameRegex = /^[a-zA-Z]+$/
+    return firstNameRegex.test(firstName)
+  }
+
+  const validateStep1 = (): boolean => {
+    const newErrors: FormErrors = {}
+
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First name is required'
+    } else if (!validateFirstName(formData.firstName)) {
+      newErrors.firstName = 'First name is required'
+    } else if (formData.firstName.trim().length < 2) {
+      newErrors.firstName = 'Please enter a valid first name'
+    }
+
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last name is required'
+    } else if (formData.lastName.trim().length < 2) {
+      newErrors.lastName = 'Last name must be at least 2 characters'
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required'
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address'
+    }
+
+    if (formData.phone && !validatePhone(formData.phone)) {
+      newErrors.phone = 'Please enter a valid phone number'
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const validateStep2 = (): boolean => {
+    const newErrors: FormErrors = {}
+
+    if (!formData.branch) {
+      newErrors.branch = 'Please select your branch of service'
+    }
+
+    if (!formData.status) {
+      newErrors.status = 'Please select your current status'
+    }
+
+    if (!formData.yearsOfService) {
+      newErrors.yearsOfService = 'Years of service is required'
+    } else {
+      const years = parseInt(formData.yearsOfService)
+      if (isNaN(years) || years < 0 || years > 40) {
+        newErrors.yearsOfService = 'Please enter a valid number of years (0-40)'
+      }
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const validateStep3 = (): boolean => {
+    const newErrors: FormErrors = {}
+
+    if (!formData.verificationFile) {
+      newErrors.verificationFile = 'Please upload a verification document'
+    } else {
+      if (formData.verificationFile.size > 10 * 1024 * 1024) {
+        newErrors.verificationFile = 'File size must be less than 10MB'
+      }
+      
+      const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png']
+      if (!allowedTypes.includes(formData.verificationFile.type)) {
+        newErrors.verificationFile = 'Please upload a PDF, JPG, or PNG file'
+      }
+    }
+
+    if (!formData.terms) {
+      newErrors.terms = 'You must agree to the terms and conditions'
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleInputChange = (field: keyof FormData, value: string | boolean | File | null) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: '' }))
+    }
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null
+    handleInputChange('verificationFile', file)
+  }
+
+  const handleNext = (currentStep: number) => {
+    let isValid = false
+    
+    switch (currentStep) {
+      case 1:
+        isValid = validateStep1()
+        break
+      case 2:
+        isValid = validateStep2()
+        break
+      default:
+        isValid = true
+    }
+
+    if (isValid) {
+      setStep(currentStep + 1)
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    if (!validateStep3()) {
+      return
+    }
+
     setIsSubmitting(true)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      const submitData = new FormData()
+      Object.entries(formData).forEach(([key, value]) => {
+        if (value instanceof File) {
+          submitData.append(key, value)
+        } else {
+          submitData.append(key, String(value))
+        }
+      })
 
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+      await new Promise((resolve) => setTimeout(resolve, 1500))
+
+      setIsSubmitting(false)
+      setIsSubmitted(true)
+    } catch (error) {
+      setIsSubmitting(false)
+      setErrors({ submit: 'An error occurred while submitting your application. Please try again.' })
+    }
   }
+
+  const ErrorMessage = ({ error }: { error: string }) => (
+    <div className="flex items-center mt-1 text-red-600 dark:text-red-400 text-sm">
+      <AlertCircle className="h-4 w-4 mr-1" />
+      {error}
+    </div>
+  )
 
   return (
     <section className="py-20 px-4 md:px-8">
@@ -63,53 +248,85 @@ export default function VeteranProgramApplicationForm() {
         ) : (
           <Card className="bg-white dark:bg-gray-800/30 backdrop-blur-sm border-gray-200 dark:border-gray-700 overflow-hidden">
             <CardContent className="p-8">
+              {/* Progress Indicator */}
               <div className="flex justify-between items-center mb-8">
                 <div className="flex space-x-2">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 1 ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 1 ? 'bg-blue-600 dark:bg-blue-600 dark:text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'}`}>
                     1
                   </div>
                   <div className={`w-16 h-1 mt-3.5 ${step >= 2 ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-700'}`}></div>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 2 ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 2 ? 'bg-blue-600 dark:bg-blue-600 dark:text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'}`}>
                     2
                   </div>
                   <div className={`w-16 h-1 mt-3.5 ${step >= 3 ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-700'}`}></div>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 3 ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= 3 ? 'bg-blue-600 dark:bg-blue-600 dark:text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'}`}>
                     3
                   </div>
                 </div>
               </div>
 
               <form onSubmit={handleSubmit}>
+                {/* Step 1: Personal Information */}
                 {step === 1 && (
                   <div className="space-y-6">
                     <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Personal Information</h2>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <Label htmlFor="firstName">First Name</Label>
-                        <Input id="firstName" placeholder="John" required />
+                        <Label htmlFor="firstName">First Name *</Label>
+                        <Input 
+                          id="firstName" 
+                          placeholder="John" 
+                          value={formData.firstName}
+                          onChange={(e) => handleInputChange('firstName', e.target.value)}
+                          className={errors.firstName ? 'border-red-500 focus:border-red-500' : ''}
+                        />
+                        {errors.firstName && <ErrorMessage error={errors.firstName} />}
                       </div>
+                      
                       <div className="space-y-2">
-                        <Label htmlFor="lastName">Last Name</Label>
-                        <Input id="lastName" placeholder="Doe" required />
+                        <Label htmlFor="lastName">Last Name *</Label>
+                        <Input 
+                          id="lastName" 
+                          placeholder="Doe" 
+                          value={formData.lastName}
+                          onChange={(e) => handleInputChange('lastName', e.target.value)}
+                          className={errors.lastName ? 'border-red-500 focus:border-red-500' : ''}
+                        />
+                        {errors.lastName && <ErrorMessage error={errors.lastName} />}
                       </div>
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email Address</Label>
-                      <Input id="email" type="email" placeholder="john.doe@example.com" required />
+                      <Label htmlFor="email">Email Address *</Label>
+                      <Input 
+                        id="email" 
+                        type="email" 
+                        placeholder="john.doe@example.com" 
+                        value={formData.email}
+                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        className={errors.email ? 'border-red-500 focus:border-red-500' : ''}
+                      />
+                      {errors.email && <ErrorMessage error={errors.email} />}
                     </div>
                     
                     <div className="space-y-2">
                       <Label htmlFor="phone">Phone Number</Label>
-                      <Input id="phone" placeholder="(555) 123-4567" />
+                      <Input 
+                        id="phone" 
+                        placeholder="(555) 123-4567" 
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                        className={errors.phone ? 'border-red-500 focus:border-red-500' : ''}
+                      />
+                      {errors.phone && <ErrorMessage error={errors.phone} />}
                     </div>
                     
                     <div className="pt-4">
                       <Button 
                         type="button" 
                         className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white"
-                        onClick={() => setStep(2)}
+                        onClick={() => handleNext(1)}
                       >
                         Continue to Military Service
                       </Button>
@@ -117,16 +334,18 @@ export default function VeteranProgramApplicationForm() {
                   </div>
                 )}
 
+                {/* Step 2: Military Service */}
                 {step === 2 && (
                   <div className="space-y-6">
                     <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Military Service</h2>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="branch">Branch of Service</Label>
+                      <Label htmlFor="branch">Branch of Service *</Label>
                       <select 
                         id="branch" 
-                        className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2 text-gray-900 dark:text-gray-100"
-                        required
+                        value={formData.branch}
+                        onChange={(e) => handleInputChange('branch', e.target.value)}
+                        className={`w-full rounded-md border px-3 py-2 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 ${errors.branch ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'}`}
                       >
                         <option value="">Select Branch</option>
                         <option value="army">Army</option>
@@ -136,14 +355,16 @@ export default function VeteranProgramApplicationForm() {
                         <option value="coastguard">Coast Guard</option>
                         <option value="space-force">Space Force</option>
                       </select>
+                      {errors.branch && <ErrorMessage error={errors.branch} />}
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="status">Current Status</Label>
+                      <Label htmlFor="status">Current Status *</Label>
                       <select 
                         id="status" 
-                        className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2 text-gray-900 dark:text-gray-100"
-                        required
+                        value={formData.status}
+                        onChange={(e) => handleInputChange('status', e.target.value)}
+                        className={`w-full rounded-md border px-3 py-2 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 ${errors.status ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'}`}
                       >
                         <option value="">Select Status</option>
                         <option value="veteran">Veteran</option>
@@ -152,11 +373,22 @@ export default function VeteranProgramApplicationForm() {
                         <option value="guard">National Guard</option>
                         <option value="spouse">Military Spouse</option>
                       </select>
+                      {errors.status && <ErrorMessage error={errors.status} />}
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="yearsOfService">Years of Service</Label>
-                      <Input id="yearsOfService" type="number" min="0" max="40" placeholder="5" required />
+                      <Label htmlFor="yearsOfService">Years of Service *</Label>
+                      <Input 
+                        id="yearsOfService" 
+                        type="number" 
+                        min="0" 
+                        max="40" 
+                        placeholder="5" 
+                        value={formData.yearsOfService}
+                        onChange={(e) => handleInputChange('yearsOfService', e.target.value)}
+                        className={errors.yearsOfService ? 'border-red-500 focus:border-red-500' : ''}
+                      />
+                      {errors.yearsOfService && <ErrorMessage error={errors.yearsOfService} />}
                     </div>
                     
                     <div className="space-y-2">
@@ -165,6 +397,8 @@ export default function VeteranProgramApplicationForm() {
                         id="skills" 
                         placeholder="Please describe any military skills or experiences that you believe are relevant to technology or entrepreneurship."
                         rows={4}
+                        value={formData.skills}
+                        onChange={(e) => handleInputChange('skills', e.target.value)}
                       />
                     </div>
                     
@@ -180,7 +414,7 @@ export default function VeteranProgramApplicationForm() {
                       <Button 
                         type="button" 
                         className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white"
-                        onClick={() => setStep(3)}
+                        onClick={() => handleNext(2)}
                       >
                         Continue to Verification
                       </Button>
@@ -188,6 +422,7 @@ export default function VeteranProgramApplicationForm() {
                   </div>
                 )}
 
+                {/* Step 3: Verification */}
                 {step === 3 && (
                   <div className="space-y-6">
                     <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Verification</h2>
@@ -200,11 +435,11 @@ export default function VeteranProgramApplicationForm() {
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="verification">Upload Verification Document</Label>
-                      <div className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg p-6 text-center">
+                      <Label htmlFor="verification">Upload Verification Document *</Label>
+                      <div className={`border-2 border-dashed rounded-lg p-6 text-center ${errors.verificationFile ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'}`}>
                         <Upload className="h-8 w-8 mx-auto text-gray-400 mb-2" />
                         <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                          Drag and drop your file here, or click to browse
+                          {formData.verificationFile ? formData.verificationFile.name : 'Drag and drop your file here, or click to browse'}
                         </p>
                         <p className="text-xs text-gray-500 dark:text-gray-500">
                           Supported formats: PDF, JPG, PNG (Max 10MB)
@@ -214,7 +449,7 @@ export default function VeteranProgramApplicationForm() {
                           type="file" 
                           className="hidden" 
                           accept=".pdf,.jpg,.jpeg,.png" 
-                          required
+                          onChange={handleFileChange}
                         />
                         <Button 
                           type="button" 
@@ -223,9 +458,10 @@ export default function VeteranProgramApplicationForm() {
                           className="mt-4 border-gray-300 dark:border-gray-700"
                           onClick={() => document.getElementById('verification')?.click()}
                         >
-                          Select File
+                          {formData.verificationFile ? 'Change File' : 'Select File'}
                         </Button>
                       </div>
+                      {errors.verificationFile && <ErrorMessage error={errors.verificationFile} />}
                     </div>
                     
                     <div className="space-y-2">
@@ -234,6 +470,8 @@ export default function VeteranProgramApplicationForm() {
                         id="comments" 
                         placeholder="Is there anything else you'd like us to know about your application?"
                         rows={3}
+                        value={formData.comments}
+                        onChange={(e) => handleInputChange('comments', e.target.value)}
                       />
                     </div>
                     
@@ -241,8 +479,9 @@ export default function VeteranProgramApplicationForm() {
                       <input 
                         type="checkbox" 
                         id="terms" 
-                        className="mt-1 rounded border-gray-300 dark:border-gray-700" 
-                        required
+                        className={`mt-1 rounded ${errors.terms ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'}`}
+                        checked={formData.terms}
+                        onChange={(e) => handleInputChange('terms', e.target.checked)}
                       />
                       <Label htmlFor="terms" className="text-sm">
                         I certify that all information provided is accurate and I agree to the{" "}
@@ -255,6 +494,13 @@ export default function VeteranProgramApplicationForm() {
                         </a>
                       </Label>
                     </div>
+                    {errors.terms && <ErrorMessage error={errors.terms} />}
+                    
+                    {errors.submit && (
+                      <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
+                        <ErrorMessage error={errors.submit} />
+                      </div>
+                    )}
                     
                     <div className="flex justify-between pt-4">
                       <Button 
@@ -280,6 +526,6 @@ export default function VeteranProgramApplicationForm() {
           </Card>
         )}
       </div>
-  </section>
+    </section>
   )
 }

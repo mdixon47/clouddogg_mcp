@@ -4,46 +4,8 @@ import { useState, useEffect } from "react"
 import { useInView } from "react-intersection-observer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { testimonials } from "@/data/mcp-testimonials"
 import { ChevronLeft, ChevronRight, Star } from "lucide-react"
-
-const testimonials = [
-  {
-    id: 1,
-    name: "Sarah Johnson",
-    role: "CEO, TechStart Inc.",
-    image: "/placeholder.svg?height=80&width=80",
-    quote:
-      "CloudDogg has transformed how we operate. Our team now accomplishes in minutes what used to take days. The ROI has been incredible.",
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: "Michael Chen",
-    role: "Real Estate Broker",
-    image: "/placeholder.svg?height=80&width=80",
-    quote:
-      "As a real estate professional, time is everything. CloudDogg automates my follow-ups, listing updates, and even helps me draft personalized property descriptions.",
-    rating: 5,
-  },
-  {
-    id: 3,
-    name: "Dr. Alicia Patel",
-    role: "Medical Director",
-    image: "/placeholder.svg?height=80&width=80",
-    quote:
-      "The HIPAA compliance and security features gave us confidence to automate patient communications. Now our staff can focus on care instead of paperwork.",
-    rating: 5,
-  },
-  {
-    id: 4,
-    name: "James Wilson",
-    role: "Founder, LocalBiz Solutions",
-    image: "/placeholder.svg?height=80&width=80",
-    quote:
-      "CloudDogg leveled the playing field for our small business. We now have enterprise-level automation that our competitors can't match.",
-    rating: 4,
-  },
-]
 
 export default function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -81,7 +43,7 @@ export default function TestimonialsSection() {
 
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text bg-clip-padding p-1 text-transparent">
             What Our Customers Say
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
