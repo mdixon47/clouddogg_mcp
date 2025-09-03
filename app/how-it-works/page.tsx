@@ -1,4 +1,3 @@
-import Footer from "@/components/footer"
 import HowItWorksHero from "@/components/how-it-works-hero"
 import HowItWorksSteps from "@/components/how-it-works-steps"
 import HowItWorksTechnical from "@/components/how-it-works-technical"
@@ -21,7 +20,6 @@ export default function HowItWorksPage() {
           <HowItWorksFAQ />
           <ClosingCTA />
         </main>
-        <Footer />
       </div>
     </div>
   )

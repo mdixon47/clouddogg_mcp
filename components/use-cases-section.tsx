@@ -82,30 +82,30 @@ export default function UseCasesSection() {
   const activeCase = useCases[activeIndex]
 
   return (
-    <section id="use-cases" className="py-20 px-4 md:px-8 bg-gray-950/50 relative">
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
+    <section id="use-cases" className="py-20 px-4 md:px-8 bg-gray-950/50 light:bg-gradient-to-br light:from-slate-50 light:to-blue-50/30 relative">
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-500/10 light:bg-blue-500/5 rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 light:from-gray-900 light:to-gray-700 bg-clip-text text-transparent">
             Transforming Industries with AI Automation
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-400 light:text-gray-600 max-w-3xl mx-auto leading-relaxed">
             See how businesses across different sectors are using CloudDogg to revolutionize their operations.
           </p>
         </div>
 
         <div ref={ref} className={`transition-opacity duration-700 ${inView ? "opacity-100" : "opacity-0"}`}>
           <div className="flex justify-center mb-8">
-            <div className="flex space-x-2 md:space-x-4 bg-gray-800/50 p-2 rounded-full">
+            <div className="flex space-x-2 md:space-x-4 bg-gray-800/50 light:bg-white/80 light:border light:border-gray-200/60 light:shadow-lg p-2 rounded-full backdrop-blur-sm">
               {useCases.map((useCase, index) => (
                 <Button
                   key={useCase.id}
                   variant={activeIndex === index ? "default" : "ghost"}
-                  className={`rounded-full ${
+                  className={`rounded-full transition-all duration-300 ${
                     activeIndex === index
-                      ? `bg-gradient-to-r ${useCase.color} text-white`
-                      : "text-gray-400 hover:text-white"
+                      ? `bg-gradient-to-r ${useCase.color} text-white shadow-lg scale-105`
+                      : "text-gray-400 hover:text-white light:text-gray-600 light:hover:text-gray-900 light:hover:bg-gray-100/80"
                   }`}
                   onClick={() => setActiveIndex(index)}
                 >
@@ -116,33 +116,33 @@ export default function UseCasesSection() {
             </div>
           </div>
 
-          <div className="relative bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6 md:p-10 overflow-hidden">
+          <div className="relative bg-gray-800/30 light:bg-white/95 backdrop-blur-sm border border-gray-700 light:border-gray-200/60 light:shadow-xl rounded-2xl p-6 md:p-10 overflow-hidden">
             <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${activeCase.color}`}></div>
 
             <div className="flex flex-col md:flex-row gap-8">
               <div className="md:w-1/2">
                 <div
-                  className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${activeCase.color} flex items-center justify-center mb-6`}
+                  className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${activeCase.color} flex items-center justify-center mb-6 shadow-lg`}
                 >
                   <activeCase.icon className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{activeCase.title}</h3>
-                <p className="text-gray-300 mb-6">{activeCase.description}</p>
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white light:text-gray-900">{activeCase.title}</h3>
+                <p className="text-gray-300 light:text-gray-600 mb-6 leading-relaxed">{activeCase.description}</p>
 
-                <Button className={`bg-gradient-to-r ${activeCase.color} hover:opacity-90 text-white`}>
+                <Button className={`bg-gradient-to-r ${activeCase.color} hover:opacity-90 hover:scale-105 text-white shadow-lg transition-all duration-300`}>
                   View {activeCase.title} Case Study
                 </Button>
               </div>
 
-              <div className="md:w-1/2 bg-gray-800/50 rounded-xl p-6">
-                <h4 className="text-lg font-semibold mb-4 text-white">Key Benefits</h4>
+              <div className="md:w-1/2 bg-gray-800/50 light:bg-gray-50/80 light:border light:border-gray-200/40 rounded-xl p-6">
+                <h4 className="text-lg font-semibold mb-4 text-white light:text-gray-900">Key Benefits</h4>
                 <ul className="space-y-3">
                   {activeCase.benefits.map((benefit, index) => (
                     <li key={index} className="flex items-start">
                       <div
-                        className={`mt-1 w-4 h-4 rounded-full bg-gradient-to-r ${activeCase.color} flex-shrink-0`}
+                        className={`mt-1 w-4 h-4 rounded-full bg-gradient-to-r ${activeCase.color} flex-shrink-0 shadow-sm`}
                       ></div>
-                      <span className="ml-3 text-gray-300">{benefit}</span>
+                      <span className="ml-3 text-gray-300 light:text-gray-700 leading-relaxed">{benefit}</span>
                     </li>
                   ))}
                 </ul>
@@ -153,7 +153,7 @@ export default function UseCasesSection() {
               <Button
                 variant="outline"
                 size="icon"
-                className="border-gray-700 text-gray-400 hover:text-white hover:bg-gray-800"
+                className="border-gray-700 light:border-gray-300 text-gray-400 light:text-gray-600 hover:text-white light:hover:text-gray-900 hover:bg-gray-800 light:hover:bg-gray-100 transition-all duration-300"
                 onClick={prevSlide}
               >
                 <ChevronLeft className="h-5 w-5" />
@@ -161,7 +161,7 @@ export default function UseCasesSection() {
               <Button
                 variant="outline"
                 size="icon"
-                className="border-gray-700 text-gray-400 hover:text-white hover:bg-gray-800"
+                className="border-gray-700 light:border-gray-300 text-gray-400 light:text-gray-600 hover:text-white light:hover:text-gray-900 hover:bg-gray-800 light:hover:bg-gray-100 transition-all duration-300"
                 onClick={nextSlide}
               >
                 <ChevronRight className="h-5 w-5" />

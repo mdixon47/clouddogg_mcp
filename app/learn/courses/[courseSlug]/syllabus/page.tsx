@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Footer from "@/components/footer"
 import CourseHeader from "@/components/learning/course-header"
 import CourseSidebar from "@/components/learning/course-sidebar"
 import CourseContent from "@/components/learning/course-content"
@@ -39,7 +38,6 @@ export default function CoursePage({ params }: { params: { courseSlug: string } 
             <RelatedCourses slug={params.courseSlug} />
           </div>
         </main>
-        <Footer />
       </div>
     </div>
   )

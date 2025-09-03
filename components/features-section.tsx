@@ -57,7 +57,7 @@ export default function FeaturesSection() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
             Powerful Features for Limitless Automation
           </h2>
-          <p className="text-xl text-gray-700 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
             CloudDogg's MCP platform connects your AI to thousands of apps, enabling automation that was previously
             impossible.
           </p>
@@ -67,18 +67,21 @@ export default function FeaturesSection() {
           {features.map((feature, index) => (
             <Card
               key={index}
-              className={`bg-white/90 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden transition-all duration-700 transform ${inView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
+              className={`group relative overflow-hidden border-gray-200/60 dark:border-gray-700 transition-all duration-700 transform hover:scale-[1.02] ${inView ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <CardContent className="p-6">
+              <CardContent className="p-6 relative z-10">
                 <div
-                  className={`w-12 h-12 rounded-lg bg-gradient-to-r ${feature.color} flex items-center justify-center mb-4`}
+                  className={`w-12 h-12 rounded-xl bg-gradient-to-r ${feature.color} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}
                 >
                   <feature.icon className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
+                <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white leading-tight">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{feature.description}</p>
               </CardContent>
+
+              {/* Subtle gradient overlay for enhanced visual appeal */}
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-gray-50/30 dark:to-gray-800/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Card>
           ))}
         </div>

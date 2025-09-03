@@ -1,5 +1,3 @@
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Home, HeartPulse, Store, Rocket, Briefcase, Landmark } from "lucide-react"
@@ -69,8 +67,6 @@ export default function CaseStudiesPage() {
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
 
-        <Header />
-
         <main className="pt-32 pb-20 px-4 md:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
@@ -116,8 +112,6 @@ export default function CaseStudiesPage() {
             </div>
           </div>
         </main>
-
-        <Footer />
       </div>
     </div>
   )

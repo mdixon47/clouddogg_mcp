@@ -1,6 +1,4 @@
 import type { Metadata } from "next"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import VeteranHero from "@/components/learning/veteran-hero"
 import VeteranBenefits from "@/components/learning/veteran-benefits"
 import VeteranCourses from "@/components/learning/veteran-courses"
@@ -29,7 +27,6 @@ export default function VeteranEntrepreneursPage() {
           <VeteranSuccess />
           <VeteranCommunity />
         </main>
-        <Footer />
       </div>
     </div>
   )

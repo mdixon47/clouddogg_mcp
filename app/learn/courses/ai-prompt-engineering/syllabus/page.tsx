@@ -1,6 +1,4 @@
 import type { Metadata } from "next"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import { aiPromptEngineering } from "@/data/courses/ai-prompt-engineering"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -19,7 +17,6 @@ export default function AIPromptEngineeringSyllabusPage() {
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-3xl dark:bg-green-500/10 light:bg-green-500/5" />
         <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl dark:bg-emerald-500/10 light:bg-emerald-500/5" />
 
-        <Header />
         <main className="pt-32 pb-20 px-4 md:px-8">
           <div className="max-w-5xl mx-auto">
             <div className="mb-8">
@@ -201,7 +198,6 @@ export default function AIPromptEngineeringSyllabusPage() {
             </div>
           </div>
         </main>
-        <Footer />
       </div>
     </div>
   )

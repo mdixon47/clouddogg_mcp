@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Header from "@/components/header"
 import VeteranProgramHero from "@/components/veteran-program/veteran-program-hero"
 import VeteranProgramBenefits from "@/components/veteran-program/veteran-program-benefits"
 import VeteranProgramCourses from "@/components/veteran-program/veteran-program-courses"
@@ -21,7 +20,6 @@ export default function VeteranProgramPage() {
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl" />
-        <Header />
         <main>
           <VeteranProgramHero />
           <VeteranProgramBenefits />
