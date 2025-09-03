@@ -11,7 +11,8 @@ export const metadata: Metadata = {
   description: "Learn the fundamentals of Model Context Protocol servers and how to implement them in your business.",
 }
 
-export default function CoursePage({ params }: { params: { courseSlug: string } }) {
+export default async function CoursePage({ params }: { params: Promise<{ courseSlug: string }> }) {
+  const { courseSlug } = await params
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900 text-gray-100">
       <div className="relative overflow-hidden">
@@ -22,20 +23,20 @@ export default function CoursePage({ params }: { params: { courseSlug: string } 
      
         <main className="pt-32 pb-20 px-4 md:px-8">
           <div className="max-w-7xl mx-auto">
-            <CourseHeader slug={params.courseSlug} />
+            <CourseHeader slug={courseSlug} />
 
             <div className="flex flex-col lg:flex-row gap-8 mt-8">
               <div className="lg:w-2/3">
-                <CourseContent slug={params.courseSlug} />
-                <CourseInstructor slug={params.courseSlug} />
-                <CourseReviews slug={params.courseSlug} />
+                <CourseContent courseSlug={courseSlug} />
+                <CourseInstructor slug={courseSlug} />
+                <CourseReviews slug={courseSlug} />
               </div>
               <div className="lg:w-1/3">
-                <CourseSidebar slug={params.courseSlug} />
+                <CourseSidebar slug={courseSlug} />
               </div>
             </div>
 
-            <RelatedCourses slug={params.courseSlug} />
+            <RelatedCourses slug={courseSlug} />
           </div>
         </main>
       </div>

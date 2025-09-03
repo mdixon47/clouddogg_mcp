@@ -8,9 +8,9 @@ import CourseReviews from "@/components/learning/course-reviews"
 import RelatedCourses from "@/components/learning/related-courses"
 
 interface CoursePageProps {
-  params: {
+  params: Promise<{
     courseSlug: string
-  }
+  }>
 }
 
 export const metadata: Metadata = {

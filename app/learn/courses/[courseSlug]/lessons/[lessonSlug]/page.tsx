@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
-import LessonContent from "@/components/learning/lesson-content"
+import LessonContent, { SolutionSection } from "@/components/learning/lesson-content"
 import LessonNavigation from "@/components/learning/lesson-navigation"
 import LessonResources from "@/components/learning/lesson-resources"
 
 interface LessonPageProps {
-  params: {
+  params: Promise<{
     courseSlug: string
     lessonSlug: string
-  }
+  }>
 }
 
 export const metadata: Metadata = {
@@ -15,7 +15,8 @@ export const metadata: Metadata = {
   description: "Learn at your own pace with our comprehensive lessons.",
 }
 
-export default function LessonPage({ params: { courseSlug, lessonSlug } }: LessonPageProps) {
+export default async function LessonPage({ params }: LessonPageProps) {
+  const { courseSlug, lessonSlug } = await params
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900">
       <main className="container mx-auto px-4 py-12">
@@ -37,7 +38,8 @@ export default function LessonPage({ params: { courseSlug, lessonSlug } }: Lesso
             />
           </div>
           <div className="lg:col-span-3">
-            <LessonContent solutions={[
+            <LessonContent courseSlug={courseSlug} lessonSlug={lessonSlug} />
+            <SolutionSection solutions={[
               {
                 title: "Course Content",
                 description: "Interactive lessons and exercises",

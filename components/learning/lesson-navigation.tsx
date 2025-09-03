@@ -8,9 +8,26 @@ import Link from "next/link"
 interface LessonNavigationProps {
   courseSlug: string
   lessonSlug: string
+  moduleIndex?: number
+  lessonIndex?: number
+  totalModules?: number
+  totalLessons?: number
+  nextLesson?: { title: string; slug: string } | null
+  prevLesson?: { title: string; slug: string } | null
+  accentColor?: string
 }
 
-export default function LessonNavigation({ courseSlug, lessonSlug }: LessonNavigationProps) {
+export default function LessonNavigation({
+  courseSlug,
+  lessonSlug,
+  moduleIndex = 0,
+  lessonIndex = 0,
+  totalModules = 4,
+  totalLessons = 12,
+  nextLesson = null,
+  prevLesson = null,
+  accentColor = "blue"
+}: LessonNavigationProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   // This would normally fetch course data based on the slug
@@ -61,21 +78,25 @@ export default function LessonNavigation({ courseSlug, lessonSlug }: LessonNavig
     if (found) break
   }
 
-  // Calculate previous and next lessons
-  let prevLesson = null
-  let nextLesson = null
+  // Calculate previous and next lessons (use props if provided, otherwise calculate)
+  let calculatedPrevLesson = prevLesson
+  let calculatedNextLesson = nextLesson
 
-  if (currentLessonIndex > 0) {
-    prevLesson = course.modules[currentModuleIndex].lessons[currentLessonIndex - 1]
-  } else if (currentModuleIndex > 0) {
-    const prevModule = course.modules[currentModuleIndex - 1]
-    prevLesson = prevModule.lessons[prevModule.lessons.length - 1]
+  if (!calculatedPrevLesson) {
+    if (currentLessonIndex > 0) {
+      calculatedPrevLesson = course.modules[currentModuleIndex].lessons[currentLessonIndex - 1]
+    } else if (currentModuleIndex > 0) {
+      const prevModule = course.modules[currentModuleIndex - 1]
+      calculatedPrevLesson = prevModule.lessons[prevModule.lessons.length - 1]
+    }
   }
 
-  if (currentLessonIndex < course.modules[currentModuleIndex].lessons.length - 1) {
-    nextLesson = course.modules[currentModuleIndex].lessons[currentLessonIndex + 1]
-  } else if (currentModuleIndex < course.modules.length - 1) {
-    nextLesson = course.modules[currentModuleIndex + 1].lessons[0]
+  if (!calculatedNextLesson) {
+    if (currentLessonIndex < course.modules[currentModuleIndex].lessons.length - 1) {
+      calculatedNextLesson = course.modules[currentModuleIndex].lessons[currentLessonIndex + 1]
+    } else if (currentModuleIndex < course.modules.length - 1) {
+      calculatedNextLesson = course.modules[currentModuleIndex + 1].lessons[0]
+    }
   }
 
   return (
@@ -104,14 +125,14 @@ export default function LessonNavigation({ courseSlug, lessonSlug }: LessonNavig
           </div>
 
           <div className="flex items-center space-x-2">
-            {prevLesson ? (
+            {calculatedPrevLesson ? (
               <Button
                 variant="outline"
                 size="sm"
                 className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
                 asChild
               >
-                <Link href={`/learn/courses/${courseSlug}/lessons/${prevLesson.slug}`}>
+                <Link href={`/learn/courses/${courseSlug}/lessons/${calculatedPrevLesson.slug}`}>
                   <ChevronLeft className="h-4 w-4 mr-1" />
                   <span className="hidden md:inline">Previous</span>
                 </Link>
@@ -123,14 +144,14 @@ export default function LessonNavigation({ courseSlug, lessonSlug }: LessonNavig
               </Button>
             )}
 
-            {nextLesson ? (
+            {calculatedNextLesson ? (
               <Button
                 variant="outline"
                 size="sm"
                 className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
                 asChild
               >
-                <Link href={`/learn/courses/${courseSlug}/lessons/${nextLesson.slug}`}>
+                <Link href={`/learn/courses/${courseSlug}/lessons/${calculatedNextLesson.slug}`}>
                   <span className="hidden md:inline">Next</span>
                   <ChevronRight className="h-4 w-4 ml-1" />
                 </Link>

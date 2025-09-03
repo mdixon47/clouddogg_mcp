@@ -16,9 +16,9 @@ export default function CourseSyllabiIndex() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {courses.map((course) => (
+        {Object.entries(courses).map(([slug, course]) => (
           <Card
-            key={course.slug}
+            key={slug}
             className="bg-white/90 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-300"
           >
             <CardHeader>
@@ -26,13 +26,9 @@ export default function CourseSyllabiIndex() {
                 <CardTitle className="text-xl font-bold text-gray-900 dark:text-white">{course.title}</CardTitle>
                 <Badge
                   variant="outline"
-                  className={
-                    course.category === "Veteran"
-                      ? "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800"
-                      : "bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-800"
-                  }
+                  className="bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-800"
                 >
-                  {course.category}
+                  {slug.includes('veteran') ? 'Veteran' : 'General'}
                 </Badge>
               </div>
               <CardDescription className="text-gray-600 dark:text-gray-400 mt-2">{course.description}</CardDescription>
@@ -59,7 +55,7 @@ export default function CourseSyllabiIndex() {
                 className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white"
                 asChild
               >
-                <Link href={`/learn/courses/${course.slug}/syllabus`}>
+                <Link href={`/learn/courses/${slug}/syllabus`}>
                   View Syllabus
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
