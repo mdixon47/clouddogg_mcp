@@ -25,7 +25,7 @@ export function ThemeScript() {
   return (
     <Script
       id="theme-script"
-      strategy="beforeInteractive"
+      strategy="afterInteractive"
       dangerouslySetInnerHTML={{
         __html: themeScriptContent,
       }}

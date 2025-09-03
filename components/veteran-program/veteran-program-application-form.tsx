@@ -246,11 +246,11 @@ export default function VeteranProgramApplicationForm() {
                       />
                       <Label htmlFor="terms" className="text-sm">
                         I certify that all information provided is accurate and I agree to the{" "}
-                        <a href="#" className="text-blue-600 dark:text-blue-400 hover:underline">
+                        <a href="/terms" className="text-blue-600 dark:text-blue-400 hover:underline">
                           Terms of Service
                         </a>{" "}
                         and{" "}
-                        <a href="#" className="text-blue-600 dark:text-blue-400 hover:underline">
+                        <a href="/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">
                           Privacy Policy
                         </a>
                       </Label>

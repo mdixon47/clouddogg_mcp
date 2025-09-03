@@ -36,7 +36,7 @@ const faqs = [
 
 export default function VeteranProgramFAQ() {
   return (
-    <section className="py-20 px-4 md:px-8">
+    <section className="pt-4 pb-20 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-700 to-cyan-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">

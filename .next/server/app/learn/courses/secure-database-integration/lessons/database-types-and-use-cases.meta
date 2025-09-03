@@ -1,0 +1,7 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "4294967294",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/learn/layout,_N_T_/learn/courses/layout,_N_T_/learn/courses/secure-database-integration/layout,_N_T_/learn/courses/secure-database-integration/lessons/layout,_N_T_/learn/courses/secure-database-integration/lessons/database-types-and-use-cases/layout,_N_T_/learn/courses/secure-database-integration/lessons/database-types-and-use-cases/page,_N_T_/learn/courses/secure-database-integration/lessons/database-types-and-use-cases"
+  }
+}

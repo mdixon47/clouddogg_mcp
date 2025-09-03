@@ -1,0 +1,266 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "origin-when-cross-origin"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "X-DNS-Prefetch-Control",
+          "value": "on"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), browsing-topics=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://vercel.live wss://ws-us3.pusher.com; frame-src 'self' https://vercel.live; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+        }
+      ],
+      "regex": "^(?:/(.*))(?:/)?$"
+    }
+  ],
+  "dynamicRoutes": [
+    {
+      "page": "/learn/courses/[courseSlug]",
+      "regex": "^/learn/courses/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcourseSlug": "nxtPcourseSlug"
+      },
+      "namedRegex": "^/learn/courses/(?<nxtPcourseSlug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/learn/courses/[courseSlug]/lessons/[lessonSlug]",
+      "regex": "^/learn/courses/([^/]+?)/lessons/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcourseSlug": "nxtPcourseSlug",
+        "nxtPlessonSlug": "nxtPlessonSlug"
+      },
+      "namedRegex": "^/learn/courses/(?<nxtPcourseSlug>[^/]+?)/lessons/(?<nxtPlessonSlug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/learn/courses/[courseSlug]/syllabus",
+      "regex": "^/learn/courses/([^/]+?)/syllabus(?:/)?$",
+      "routeKeys": {
+        "nxtPcourseSlug": "nxtPcourseSlug"
+      },
+      "namedRegex": "^/learn/courses/(?<nxtPcourseSlug>[^/]+?)/syllabus(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/auth",
+      "regex": "^/auth(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/auth(?:/)?$"
+    },
+    {
+      "page": "/case-studies",
+      "regex": "^/case\\-studies(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/case\\-studies(?:/)?$"
+    },
+    {
+      "page": "/case-studies/healthcare",
+      "regex": "^/case\\-studies/healthcare(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/case\\-studies/healthcare(?:/)?$"
+    },
+    {
+      "page": "/case-studies/local-business",
+      "regex": "^/case\\-studies/local\\-business(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/case\\-studies/local\\-business(?:/)?$"
+    },
+    {
+      "page": "/case-studies/real-estate",
+      "regex": "^/case\\-studies/real\\-estate(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/case\\-studies/real\\-estate(?:/)?$"
+    },
+    {
+      "page": "/cookies",
+      "regex": "^/cookies(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cookies(?:/)?$"
+    },
+    {
+      "page": "/css-test",
+      "regex": "^/css\\-test(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/css\\-test(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/how-it-works",
+      "regex": "^/how\\-it\\-works(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/how\\-it\\-works(?:/)?$"
+    },
+    {
+      "page": "/learn",
+      "regex": "^/learn(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/learn(?:/)?$"
+    },
+    {
+      "page": "/learn/courses",
+      "regex": "^/learn/courses(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/learn/courses(?:/)?$"
+    },
+    {
+      "page": "/learn/courses/ai-prompt-engineering",
+      "regex": "^/learn/courses/ai\\-prompt\\-engineering(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/learn/courses/ai\\-prompt\\-engineering(?:/)?$"
+    },
+    {
+      "page": "/learn/courses/ai-prompt-engineering/lessons/foundations-of-prompt-engineering",
+      "regex": "^/learn/courses/ai\\-prompt\\-engineering/lessons/foundations\\-of\\-prompt\\-engineering(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/learn/courses/ai\\-prompt\\-engineering/lessons/foundations\\-of\\-prompt\\-engineering(?:/)?$"
+    },
+    {
+      "page": "/learn/courses/ai-prompt-engineering/syllabus",
+      "regex": "^/learn/courses/ai\\-prompt\\-engineering/syllabus(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/learn/courses/ai\\-prompt\\-engineering/syllabus(?:/)?$"
+    },
+    {
+      "page": "/learn/courses/secure-database-integration/lessons/database-types-and-use-cases",
+      "regex": "^/learn/courses/secure\\-database\\-integration/lessons/database\\-types\\-and\\-use\\-cases(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/learn/courses/secure\\-database\\-integration/lessons/database\\-types\\-and\\-use\\-cases(?:/)?$"
+    },
+    {
+      "page": "/learn/courses/security-compliance-veterans/lessons/veteran-business-security-landscape",
+      "regex": "^/learn/courses/security\\-compliance\\-veterans/lessons/veteran\\-business\\-security\\-landscape(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/learn/courses/security\\-compliance\\-veterans/lessons/veteran\\-business\\-security\\-landscape(?:/)?$"
+    },
+    {
+      "page": "/learn/courses/veteran-entrepreneurs",
+      "regex": "^/learn/courses/veteran\\-entrepreneurs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/learn/courses/veteran\\-entrepreneurs(?:/)?$"
+    },
+    {
+      "page": "/learn/courses/zapier-integration/introduction",
+      "regex": "^/learn/courses/zapier\\-integration/introduction(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/learn/courses/zapier\\-integration/introduction(?:/)?$"
+    },
+    {
+      "page": "/learn/courses/zapier-integration/lessons",
+      "regex": "^/learn/courses/zapier\\-integration/lessons(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/learn/courses/zapier\\-integration/lessons(?:/)?$"
+    },
+    {
+      "page": "/privacy",
+      "regex": "^/privacy(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/privacy(?:/)?$"
+    },
+    {
+      "page": "/terms",
+      "regex": "^/terms(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/terms(?:/)?$"
+    },
+    {
+      "page": "/veteran-program",
+      "regex": "^/veteran\\-program(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/veteran\\-program(?:/)?$"
+    },
+    {
+      "page": "/veteran-program/apply",
+      "regex": "^/veteran\\-program/apply(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/veteran\\-program/apply(?:/)?$"
+    },
+    {
+      "page": "/veteran-program/success-stories",
+      "regex": "^/veteran\\-program/success\\-stories(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/veteran\\-program/success\\-stories(?:/)?$"
+    },
+    {
+      "page": "/veteran-program/verification-status",
+      "regex": "^/veteran\\-program/verification\\-status(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/veteran\\-program/verification\\-status(?:/)?$"
+    },
+    {
+      "page": "/veteran-program/verify",
+      "regex": "^/veteran\\-program/verify(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/veteran\\-program/verify(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "RSC",
+    "varyHeader": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch",
+    "prefetchHeader": "Next-Router-Prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "Next-Router-Segment-Prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  },
+  "rewrites": []
+}

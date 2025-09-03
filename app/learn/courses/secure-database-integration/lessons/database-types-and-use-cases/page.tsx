@@ -16,12 +16,12 @@ export default function DatabaseTypesLessonPage() {
   const currentModule = secureDatabaseIntegration.modules[0]
   const currentLesson = currentModule.lessons[0]
 
-  const nextLesson = {
+  const _nextLesson = {
     title: "MCP Database Connectors",
     slug: "mcp-database-connectors",
   }
 
-  const prevLesson = null // This is the first lesson
+  const _prevLesson = null // This is the first lesson
 
   return (
     <div className="container mx-auto px-4 py-8">

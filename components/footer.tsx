@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export default function Footer() {
   return (
     <footer className="bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 py-12 px-4 md:px-8">
@@ -216,24 +218,24 @@ export default function Footer() {
             © {new Date().getFullYear()} CloudDogg, Inc. All rights reserved. Veteran-owned business.
           </p>
           <div className="flex space-x-6">
-            <a
-              href="#"
+            <Link
+              href="/privacy"
               className="text-gray-500 hover:text-gray-900 text-sm transition-colors dark:text-gray-500 dark:hover:text-white"
             >
               Privacy Policy
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/terms"
               className="text-gray-500 hover:text-gray-900 text-sm transition-colors dark:text-gray-500 dark:hover:text-white"
             >
               Terms of Service
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/cookies"
               className="text-gray-500 hover:text-gray-900 text-sm transition-colors dark:text-gray-500 dark:hover:text-white"
             >
               Cookie Policy
-            </a>
+            </Link>
           </div>
         </div>
       </div>

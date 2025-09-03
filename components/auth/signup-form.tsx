@@ -70,11 +70,11 @@ export default function SignupForm({ onSwitchToLogin }: SignupFormProps) {
           <Checkbox id="terms" required />
           <Label htmlFor="terms" className="text-sm text-gray-400">
             I agree to the{" "}
-            <a href="#" className="text-blue-400 hover:text-blue-300">
+            <a href="/terms" className="text-blue-400 hover:text-blue-300">
               terms of service
             </a>{" "}
             and{" "}
-            <a href="#" className="text-blue-400 hover:text-blue-300">
+            <a href="/privacy" className="text-blue-400 hover:text-blue-300">
               privacy policy
             </a>
           </Label>

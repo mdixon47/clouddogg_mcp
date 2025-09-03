@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Debug styles to ensure CSS is loading */
+body {
+  --css-loaded: true;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

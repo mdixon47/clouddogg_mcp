@@ -13,7 +13,7 @@ export default function VeteranProgramHero() {
   }, [])
 
   return (
-    <section className="pt-32 pb-20 px-4 md:px-8 relative">
+    <section className="pt-32 pb-12 px-4 md:px-8 relative">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row items-start">
           <div

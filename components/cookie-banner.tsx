@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { X, Cookie, Settings } from "lucide-react"
+import Link from "next/link"
 
 export default function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false)
@@ -79,7 +80,14 @@ export default function CookieBanner() {
             <div>
               <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
                 We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our
-                traffic. By clicking "Accept All", you consent to our use of cookies.
+                traffic. By clicking "Accept All", you consent to our use of cookies. Learn more in our{" "}
+                <Link href="/privacy" className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">
+                  Privacy Policy
+                </Link>{" "}
+                and{" "}
+                <Link href="/cookies" className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">
+                  Cookie Policy
+                </Link>.
               </p>
               <div
                 className="flex items-center text-xs text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 cursor-pointer mb-2"

@@ -42,7 +42,7 @@ const benefits = [
 
 export default function VeteranProgramBenefits() {
   return (
-    <section className="py-20 px-4 md:px-8">
+    <section className="py-12 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Content will be added here */}
         <div className="h-1"></div>

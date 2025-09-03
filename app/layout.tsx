@@ -7,6 +7,7 @@ import CookieBanner from "@/components/cookie-banner"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ThemeScript, ClientThemeScript } from "@/components/theme-script"
 import { ErrorBoundary, SectionErrorBoundary } from "@/components/error-boundary"
+import CSSDebug from "@/components/css-debug"
 
 export const metadata: Metadata = {
   title: "CloudDogg MCP - AI Automation Platform",
@@ -24,6 +25,19 @@ export default function RootLayout({
       <head>
         {/* Theme script to prevent FOUC - now using Next.js Script component */}
         <ThemeScript />
+        {/* Fallback styles for development */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            body {
+              margin: 0;
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+              background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+              color: #f9fafb;
+              min-height: 100vh;
+            }
+            * { box-sizing: border-box; }
+          `
+        }} />
       </head>
       <body>
         <ErrorBoundary>
@@ -53,6 +67,7 @@ export default function RootLayout({
                 </SectionErrorBoundary>
               </div>
             </div>
+            <CSSDebug />
           </ThemeProvider>
         </ErrorBoundary>
       </body>
