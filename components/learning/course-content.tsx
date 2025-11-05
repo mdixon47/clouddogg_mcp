@@ -54,6 +54,8 @@ interface CourseContentProps {
   courseSlug: string
 }
 
+// Default course content component (not currently used but kept for reference)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function DefaultCourseContent({ courseSlug }: CourseContentProps) {
   const { ref, inView } = useInView({
     triggerOnce: true,

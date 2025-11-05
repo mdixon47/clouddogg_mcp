@@ -8,7 +8,7 @@ interface CourseInstructorProps {
   slug: string
 }
 
-export default function CourseInstructor({ slug }: CourseInstructorProps) {
+export default function CourseInstructor({ slug: _slug }: CourseInstructorProps) {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,

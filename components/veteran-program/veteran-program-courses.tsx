@@ -1,6 +1,6 @@
 "use client"
 
-const veteranCourses = [
+const _veteranCourses = [
   {
     title: "Military to Tech Transition",
     description: "Learn how to leverage your military experience in the technology sector.",

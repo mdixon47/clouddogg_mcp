@@ -13,7 +13,7 @@ interface LessonQuizProps {
   lessonSlug: string
 }
 
-export default function LessonQuiz({ courseSlug, lessonSlug }: LessonQuizProps) {
+export default function LessonQuiz({ courseSlug: _courseSlug, lessonSlug: _lessonSlug }: LessonQuizProps) {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,

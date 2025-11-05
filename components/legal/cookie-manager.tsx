@@ -140,7 +140,7 @@ export default function CookieManager() {
   ])
 
   const [hasChanges, setHasChanges] = useState(false)
-  const [savedSettings, setSavedSettings] = useState<Record<string, boolean>>({})
+  const [_savedSettings, setSavedSettings] = useState<Record<string, boolean>>({})
 
   useEffect(() => {
     // Load saved preferences from localStorage

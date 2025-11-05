@@ -5,8 +5,12 @@ import { useEffect, useState } from 'react'
 export default function CSSDebug() {
   const [cssLoaded, setCssLoaded] = useState(false)
   const [tailwindLoaded, setTailwindLoaded] = useState(false)
+  const [host, setHost] = useState('')
 
   useEffect(() => {
+    // Set the host on client side
+    setHost(window.location.host)
+
     // Check if CSS is loaded
     const checkCSS = () => {
       // Check if any stylesheets are loaded
@@ -19,11 +23,11 @@ export default function CSSDebug() {
       testElement.style.position = 'absolute'
       testElement.style.top = '-9999px'
       document.body.appendChild(testElement)
-      
+
       const computedStyle = window.getComputedStyle(testElement)
       const hasTailwind = computedStyle.backgroundColor === 'rgb(59, 130, 246)' // bg-blue-500
       setTailwindLoaded(hasTailwind)
-      
+
       document.body.removeChild(testElement)
     }
 
@@ -40,7 +44,7 @@ export default function CSSDebug() {
   }
 
   return (
-    <div 
+    <div
       style={{
         position: 'fixed',
         top: '10px',
@@ -58,7 +62,7 @@ export default function CSSDebug() {
       <div>CSS: {cssLoaded ? '✅' : '❌'}</div>
       <div>Tailwind: {tailwindLoaded ? '✅' : '❌'}</div>
       <div style={{ fontSize: '10px', marginTop: '4px', opacity: 0.8 }}>
-        {window.location.host}
+        {host}
       </div>
     </div>
   )

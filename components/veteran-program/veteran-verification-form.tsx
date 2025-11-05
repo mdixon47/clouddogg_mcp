@@ -64,7 +64,7 @@ export default function VeteranVerificationForm() {
     try {
       await new Promise(resolve => setTimeout(resolve, 2000))
       setSubmitStatus('success')
-    } catch (_error) {
+    } catch {
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)

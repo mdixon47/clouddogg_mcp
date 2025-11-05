@@ -11,7 +11,7 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent pb-1">
               CloudDogg
             </span>
             <span className="px-2 py-1 text-xs font-bold bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-md">

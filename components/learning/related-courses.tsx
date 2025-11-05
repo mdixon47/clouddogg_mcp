@@ -10,7 +10,7 @@ interface RelatedCoursesProps {
   slug: string
 }
 
-export default function RelatedCourses({ slug }: RelatedCoursesProps) {
+export default function RelatedCourses({ slug: _slug }: RelatedCoursesProps) {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,

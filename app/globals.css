@@ -542,6 +542,48 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
+/* Light mode for Closing CTA component */
+.light .bg-gradient-to-b.from-gray-800\/50.to-gray-900\/50 {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.95)) !important;
+  border-color: #e5e7eb !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08) !important;
+}
+
+.light .bg-gradient-to-b.from-gray-800\/50.to-gray-900\/50 .bg-gradient-to-r.from-white.via-blue-100.to-cyan-200 {
+  background-image: linear-gradient(to right, #2563eb, #0891b2, #1e40af) !important;
+}
+
+.light .bg-gradient-to-b.from-gray-800\/50.to-gray-900\/50 .text-gray-300 {
+  color: #374151 !important;
+}
+
+.light .bg-gradient-to-b.from-gray-800\/50.to-gray-900\/50 .bg-gray-800\/50 {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+.light .bg-gradient-to-b.from-gray-800\/50.to-gray-900\/50 .text-blue-400 {
+  color: #2563eb !important;
+}
+
+.light .bg-gradient-to-b.from-gray-800\/50.to-gray-900\/50 .text-gray-200 {
+  color: #374151 !important;
+}
+
+.light .bg-gradient-to-b.from-gray-800\/50.to-gray-900\/50 .border-gray-600 {
+  border-color: #d1d5db !important;
+}
+
+.light .bg-gradient-to-b.from-gray-800\/50.to-gray-900\/50 button.border-gray-600 {
+  color: #374151 !important;
+}
+
+.light .bg-gradient-to-b.from-gray-800\/50.to-gray-900\/50 button.border-gray-600:hover {
+  background-color: #f3f4f6 !important;
+  color: #111827 !important;
+}
+
 /* Responsive improvements */
 @media (max-width: 640px) {
   .sm\:flex-col {

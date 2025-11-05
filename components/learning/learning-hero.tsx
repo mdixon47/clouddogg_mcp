@@ -23,7 +23,7 @@ export default function LearningHero() {
               <Medal className="h-4 w-4 mr-2" />
               <span className="text-sm font-medium">Veteran-Owned, Veteran-Focused</span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-white via-blue-100 to-cyan-200 bg-clip-text text-transparent mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-normal bg-gradient-to-r from-white via-blue-100 to-cyan-200 bg-clip-text text-transparent mb-6 pb-2">
               Master MCP Servers & AI Automation
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8">

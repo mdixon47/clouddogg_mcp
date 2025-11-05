@@ -20,13 +20,13 @@ interface LessonNavigationProps {
 export default function LessonNavigation({
   courseSlug,
   lessonSlug,
-  moduleIndex = 0,
-  lessonIndex = 0,
-  totalModules = 4,
-  totalLessons = 12,
+  moduleIndex: _moduleIndex = 0,
+  lessonIndex: _lessonIndex = 0,
+  totalModules: _totalModules = 4,
+  totalLessons: _totalLessons = 12,
   nextLesson = null,
   prevLesson = null,
-  accentColor = "blue"
+  accentColor: _accentColor = "blue"
 }: LessonNavigationProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 

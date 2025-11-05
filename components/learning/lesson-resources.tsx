@@ -10,7 +10,7 @@ interface LessonResourcesProps {
   lessonSlug: string
 }
 
-export default function LessonResources({ courseSlug, lessonSlug }: LessonResourcesProps) {
+export default function LessonResources({ courseSlug: _courseSlug, lessonSlug: _lessonSlug }: LessonResourcesProps) {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,

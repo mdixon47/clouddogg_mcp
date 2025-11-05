@@ -1,6 +1,4 @@
 import type { ReactNode } from "react"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import Link from "next/link"
@@ -31,15 +29,7 @@ export default function CaseStudyLayout({
   nextCase,
 }: CaseStudyLayoutProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900 text-gray-100">
-      <div className="relative overflow-hidden">
-        {/* Background glow effects */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
-
-        <Header />
-
-        <main className="pt-24 pb-20">
+    <main className="pt-24 pb-20">
           {/* Hero Section */}
           <div className="relative px-4 md:px-8 py-16 md:py-24 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-30" />
@@ -101,9 +91,5 @@ export default function CaseStudyLayout({
             </div>
           </div>
         </main>
-
-        <Footer />
-      </div>
-    </div>
   )
 }

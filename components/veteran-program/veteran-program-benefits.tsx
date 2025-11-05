@@ -1,7 +1,7 @@
 "use client"
 import { Medal, DollarSign, Users, BookOpen, Briefcase, Shield } from "lucide-react"
 
-const benefits = [
+const _benefits = [
   {
     title: "50% Course Discount",
     description: "All courses and learning paths are available at half price for verified veterans.",

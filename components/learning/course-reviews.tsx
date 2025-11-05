@@ -9,7 +9,7 @@ interface CourseReviewsProps {
   slug: string
 }
 
-export default function CourseReviews({ slug }: CourseReviewsProps) {
+export default function CourseReviews({ slug: _slug }: CourseReviewsProps) {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,

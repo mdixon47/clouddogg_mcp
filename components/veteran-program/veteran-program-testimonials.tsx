@@ -1,6 +1,6 @@
 "use client"
 
-const testimonials = [
+const _testimonials = [
   {
     name: "James Wilson",
     role: "Former Army Captain, Now Tech Entrepreneur",
